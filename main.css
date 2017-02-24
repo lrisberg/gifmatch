@@ -1,0 +1,11 @@
+/*This is the CSS file!*/
+.tile {
+  background-color: grey;
+  border: 1px solid black;
+  height: 150px;
+  width: 150px;
+}
+
+.gamerow {
+  clear: both;
+}
