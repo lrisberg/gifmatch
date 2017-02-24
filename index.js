@@ -10,22 +10,40 @@ $(document).ready(function() {
 
   // ---FUNCTIONS--- //
 
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   function createGrid() {
     for (let i = 0; i < rows; i++) {
       let row = $('<div>').addClass('row tile-row');
       $('#gameboard').append(row);
       for (let j = 0; j < columns; j++) {
-        let tile = $('<div>').addClass('col tile');
+        let tile = $('<div>').addClass('col tile unfilled');
         row.append(tile);
       }
     }
   }
 
-  function renderGIFs(urls) {
-    let tiles = $('.tile');
-    for (let i = 0; i < tiles.length; i++) {
-      let tile = tiles[i];
-      let img = $('<img>').attr('src', urls[i]).attr('height', '150px').attr('width', '150px');
+  // Until there are no tiles left:
+  // 1. pick random GIF
+  // 2. pick a random tile, append the GIF to the tile
+  // 3. remove that tile from the pool of available tiles
+  // 4. pick another random tile, append the same GIF to the tile
+  // 5. remove that tile from the pool of available tiles
+  // 6. repeat
+
+  function renderGIFs(imgurls) {
+    let availableTiles = $('.unfilled'); // .tile plus .unfilled?
+    console.log(availableTiles);
+    for (let i = 0; i < availableTiles.length; i++) {
+      let gif = imgurls[getRandomInt(0, imgurls.length)];
+      let tile = availableTiles[getRandomInt(0, availableTiles.length)];
+
+
+      let img = $('<img>').attr('src', imgurls[i]).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
       $(tile).append(img);
     }
   }
@@ -67,9 +85,5 @@ $(document).ready(function() {
         renderGIFs(GIFURLs);
       }
     })
-
-
   })
-
-
 })
