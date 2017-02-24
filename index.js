@@ -10,7 +10,7 @@ $(document).ready(function() {
 
   // ---FUNCTIONS--- //
 
-  function createGrid(rows, columns) {
+  function createGrid() {
     for (let i = 0; i < rows; i++) {
       let row = $('<div>').addClass('row tile-row');
       $('#gameboard').append(row);
@@ -33,15 +33,19 @@ $(document).ready(function() {
 
 
   // ---CREATION--- //
-  createGrid(rows, columns);
+  createGrid();
 
   // ---EVENTS--- //
 
-  // toggle hide/show on tile click
+  // toggle hide/show on tile/img click
   $('#gameboard').click(function(event) {
     let target = event.target;
     if ($(target).is('img')) {
       $(target).toggleClass('hidden');
+    }
+    if ($(target).hasClass('tile')) {
+      let img = ($(target).children('img'));
+      img.toggleClass('hidden');
     }
   })
 

@@ -1,4 +1,6 @@
-/*This is the CSS file!*/
+
+
+
 .tile {
   background-color: grey;
   border: 1px solid black;
@@ -11,6 +13,5 @@
 }
 
 .hidden {
-  background-color: red;
   display: none;
 }
