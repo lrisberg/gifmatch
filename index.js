@@ -23,9 +23,10 @@ $(document).ready(function() {
 
   function renderGIFs(urls) {
     let tiles = $('.tile');
-    for (let tile of tiles) {
-      let img = $('<img>').attr('hello');
-      console.log(img);
+    for (let i = 0; i < tiles.length; i++) {
+      let tile = tiles[i];
+      let img = $('<img>').attr('src', urls[i]);
+      $(tile).append(img);
     }
   }
 
