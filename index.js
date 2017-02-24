@@ -13,7 +13,7 @@ const columns = 5;
 function createGrid(rows, columns) {
   console.log('createGrid() was called');
   for (let i = 0; i < rows; i++) {
-    let row = $('<div>').addClass('row gamerow');
+    let row = $('<div>').addClass('row tile-row');
     $('#gameboard').append(row);
     for (let j = 0; j < columns; j++) {
       let tile = $('<div>').addClass('col tile').text('GIF');
