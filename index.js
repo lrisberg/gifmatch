@@ -40,9 +40,8 @@ $(document).ready(function() {
   // toggle hide/show on tile click
   $('#gameboard').click(function(event) {
     let target = event.target;
-    if ($(target).hasClass('tile')) {
-      console.log('You clicked a tile');
-      $(target).toggle();
+    if ($(target).is('img')) {
+      $(target).toggleClass('hidden');
     }
   })
 
@@ -53,7 +52,6 @@ $(document).ready(function() {
     if (userSearch === '') {
       console.log('You didn\'t enter anything');
     }
-    console.log(userSearch);
     $.ajax({
       method: 'GET',
       url: `https://api.tenor.co/v1/search?tag=${userSearch}`,
@@ -63,7 +61,6 @@ $(document).ready(function() {
           GIFURLs.push(gif.media[0].gif.url);
         }
         renderGIFs(GIFURLs);
-        console.log(GIFURLs);
       }
     })
 

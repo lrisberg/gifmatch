@@ -9,3 +9,8 @@
 .tile-row {
   margin-bottom: 0px;
 }
+
+.hidden {
+  background-color: red;
+  display: none;
+}
