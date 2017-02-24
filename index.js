@@ -4,11 +4,11 @@ $(document).ready(function() {
   const rows = 4;
   const columns = 5;
 
+  let GIFURLs = [];
+
   // STATE //
 
   // FUNCTIONS //
-
-
 
   function createGrid(rows, columns) {
     for (let i = 0; i < rows; i++) {
@@ -21,16 +21,45 @@ $(document).ready(function() {
     }
   }
 
+  function renderGIFs(urls) {
+    let tiles = $('.tile');
+    for (let tile of tiles) {
+      let img = $('<img>').attr('hello');
+      console.log(img);
+    }
+  }
+
+
+
   // CREATION //
   createGrid(rows, columns);
 
   // EVENTS //
 
+
+
   $('button').click(function(event) {
     event.preventDefault();
-    console.log('You clicked the button');
     let userSearch = $('#search').val();
+    if (userSearch === '') {
+      console.log('You didn\'t enter anything');
+    }
     console.log(userSearch);
+    $.ajax({
+      method: 'GET',
+      url: `https://api.tenor.co/v1/search?tag=${userSearch}`,
+      dataType: 'json',
+      success: function(data) {
+        for (let gif of data.results) {
+          GIFURLs.push(gif.media[0].gif.url);
+          //let gifImg = $('<img>').attr('src', gifGif.url);
+
+        }
+        renderGIFs(GIFURLs);
+        console.log(GIFURLs);
+      }
+    })
+
 
   })
 
