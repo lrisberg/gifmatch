@@ -5,3 +5,7 @@
   height: 150px;
   width: 150px;
 }
+
+.tile-row {
+  margin-bottom: 0px;
+}
