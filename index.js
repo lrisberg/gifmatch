@@ -70,7 +70,7 @@ $(document).ready(function() {
   }
 
   function resetGrid() {
-    $('.tile').removeClass('matched').removeClass('hidden').addClass('shown').addClass('unfilled');
+    $('.tile').removeClass('matched').removeClass('hidden').removeClass('shown').addClass('unfilled');
     $('img').remove();
   }
 
@@ -123,28 +123,33 @@ $(document).ready(function() {
 
         // if it's the last match, display 'won' condition
         if ($('.matched').length === (rows * columns) - 2) {
+          matchTile($(imgElem).parent());
+          matchTile($(currentGifElem).parent());
           console.log('You won!');
           showImages($('img'));
           showPlayAgain();
+          currentGifElem = null;
         }
 
         else {
+          matchTile($(imgElem).parent());
+          matchTile($(currentGifElem).parent());
+          let toHideElem = currentGifElem;
+          currentGifElem = null;
           window.setTimeout(function() {
             hideImages(imgElem);
-            hideImages(currentGifElem);
-            matchTile($(imgElem).parent());
-            matchTile($(currentGifElem).parent());
-            currentGifElem = null;
+            hideImages(toHideElem);
           }, 1000)
         }
       }
       else if (currentGifElem.attr('src') !== imgUrl) {
         console.log('Not a match');
         showImages(imgElem);
+        let toHideElem = currentGifElem;
+        currentGifElem = null;
         window.setTimeout(function() {
           hideImages(imgElem);
-          hideImages(currentGifElem);
-          currentGifElem = null;
+          hideImages(toHideElem);
         }, 1000)
       }
     }
