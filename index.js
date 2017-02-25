@@ -82,7 +82,13 @@ $(document).ready(function() {
       else if (currentGif.attr('src') === imgUrl) {
         console.log('Its a match!');
         imgElem.removeClass('hidden').addClass('shown');
-        currentGif = '';
+        window.setTimeout(function() {
+          imgElem.removeClass('shown').addClass('hidden');
+          $(currentGif).removeClass('shown').addClass('hidden');
+          imgElem.removeClass('shown').parent().addClass('matched');
+          $(currentGif).removeClass('shown').parent().addClass('matched');
+          currentGif = '';
+        }, 1000)
       }
       else if (currentGif.attr('src') !== imgUrl) {
         console.log('Not a match');
@@ -91,7 +97,7 @@ $(document).ready(function() {
           imgElem.removeClass('shown').addClass('hidden');
           $(currentGif).removeClass('shown').addClass('hidden');
           currentGif = '';
-        }, 1500)
+        }, 1000)
       }
     }
   })

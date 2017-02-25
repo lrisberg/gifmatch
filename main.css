@@ -21,6 +21,10 @@
   visibility: visible;
 }
 
+.matched {
+  background-color: white;
+}
+
 .welcome {
   padding-top: 200px;
 }
