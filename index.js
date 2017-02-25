@@ -63,12 +63,19 @@ $(document).ready(function() {
     $('#welcome-screen').hide();
   }
 
+  function showPlayAgain() {
+    $('.play-again').show();
+  }
+
+  function hidePlayAgain() {
+    $('.play-again').hide();
+  }
+
+  // --- INITIALIZATION--- //
+
+  hidePlayAgain();
+
   // ---EVENTS--- //
-
-
-  // 1. click the first tile. Show the image and set the currentGif to that Gif.
-  // 2. click another tile. Show that img. If that img === currentGif, log 'It's a match!' and apply the class 'matched' to both images.
-  // 3. Reset the currentGif to ''.
 
   $('#gameboard').click(function(event) {
     let target = event.target;
@@ -88,8 +95,7 @@ $(document).ready(function() {
         if ($('.matched').length === (rows * columns) - 2) {
           console.log('You won!');
           $('img').removeClass('hidden').addClass('shown');
-          // add 'shown' to all tiles
-          // add play again button to the screen below the grid
+          showPlayAgain();
         }
 
         else {

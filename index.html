@@ -23,36 +23,46 @@
   <!-- WELCOME -->
   <div id="welcome-screen" class="container">
 
-  <div class="row center welcome">
-    <h1>GIFMATCH</h1>
+    <div class="row center welcome">
+      <h1>GIFMATCH</h1>
 
-<div class="row center">
-  <h3>I want to match:</h3>
-  <div class="row center">
-    <form>
-      <div class="input-field col offset-l4 l4">
-        <input id="search" type="search" placeholder="Search GIFs">
-        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-        <i class="material-icons">close</i>
+      <div class="row center">
+        <h3>I want to match:</h3>
+        <div class="row center">
+          <form>
+            <div class="input-field col offset-l4 l4">
+              <input id="search" type="search" placeholder="Search GIFs">
+              <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
 
-        <button class="btn waves-effect waves-light" type="submit" name="action">PLAY!
+              <button class="btn waves-effect waves-light" type="submit" name="action">PLAY!
   <i class="material-icons right">send</i>
 </button>
 
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
-  </div>
-</div>
-</div>
+    </div>
 
   </div>
 
   <!-- GAME GRID -->
-  <div id="gameboard" class="container">
-
-
-
+  <div class="container">
+    <div class="row">
+      <div id="gameboard" class="container">
+      </div>
+    </div>
   </div>
+
+  <div class="play-again container">
+    <div class="row">
+    <h3>You Won! Play again?</h3>
+    <button id="play-again-button" class="btn waves-effect waves-light" type="submit" name="action">Play Again!
+<i class="material-icons right">send</i>
+</button>
+</div>
+</div>
 
 </body>
 
