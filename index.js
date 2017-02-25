@@ -30,23 +30,17 @@ $(document).ready(function() {
   }
 
   function pickRandomUnfilledTile() {
-    let tileIndex = getRandomInt(0, $('.unfilled').length - 1);
-    let tile = $('.unfilled')[tileIndex];
-
-    return tile;
+    return $('.unfilled')[getRandomInt(0, $('.unfilled').length - 1)];
   }
 
   function renderGifs(shuffledURLs) {
-    let availableTiles = $('.unfilled');
     for (let url of shuffledURLs) {
       let firstTile = pickRandomUnfilledTile();
       let firstGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
-      $(firstTile).append(firstGif);
-      $(firstTile).removeClass('unfilled');
+      $(firstTile).append(firstGif).removeClass('unfilled');
       let secondTile = pickRandomUnfilledTile();
       let secondGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
-      $(secondTile).append(secondGif);
-      $(secondTile).removeClass('unfilled');
+      $(secondTile).append(secondGif).removeClass('unfilled');
     }
   }
 
@@ -72,7 +66,13 @@ $(document).ready(function() {
     $('.play-again').hide();
   }
 
-  function getGifs() {
+  function shuffleAndRenderGifs(gifUrls) {
+    let shuffledGifUrls = shuffleArray(gifUrls);
+
+    renderGifs(shuffledGifUrls);
+  }
+
+  function getGifs(onSuccess) {
     $.ajax({
       method: 'GET',
       url: `https://api.tenor.co/v1/search?tag=${currentTopic}`,
@@ -82,11 +82,9 @@ $(document).ready(function() {
         for (let gif of data.results) {
           gifUrls.push(gif.media[0].gif.url);
         }
-        let shuffledGifUrls = shuffleArray(gifUrls);
-
-        renderGifs(shuffledGifUrls);
+        onSuccess(gifUrls);
       }
-    })
+    });
   }
 
   // --- INITIALIZATION--- //
@@ -147,7 +145,7 @@ $(document).ready(function() {
     }
     hideWelcomeScreen();
     createGrid();
-    getGifs();
+    getGifs(shuffleAndRenderGifs);
   })
 
   // play again
@@ -155,6 +153,7 @@ $(document).ready(function() {
     event.preventDefault();
     $('.tile').removeClass('matched').removeClass('hidden').addClass('shown').addClass('unfilled');
     $('img').remove();
-    getGifs();
+    getGifs(shuffleAndRenderGifs);
+    hidePlayAgain();
   })
 })
