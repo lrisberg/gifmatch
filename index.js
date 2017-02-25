@@ -4,7 +4,7 @@ $(document).ready(function() {
   const rows = 4;
   const columns = 5;
 
-  let GIFURLs = [];
+  let gifUrls = [];
 
   // ---STATE--- //
 
@@ -35,20 +35,39 @@ $(document).ready(function() {
   // 5. remove that tile from the pool of available tiles
   // 6. repeat
 
-  function renderGIFs(imgurls) {
+  function renderGIFs(imgUrls) {
     let availableTiles = $('.unfilled'); // .tile plus .unfilled?
-    console.log(availableTiles);
     for (let i = 0; i < availableTiles.length; i++) {
-      let gif = imgurls[getRandomInt(0, imgurls.length)];
-      let tile = availableTiles[getRandomInt(0, availableTiles.length)];
-
-
-      let img = $('<img>').attr('src', imgurls[i]).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
-      $(tile).append(img);
+      let randGIFIndex = getRandomInt(0, imgUrls.length - 1);
+      let gif = $('<img>').attr('src', imgUrls[randGIFIndex]).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      let randTileIndex = getRandomInt(0, availableTiles.length - 1);
+      let tile = availableTiles[randTileIndex];
+      $(tile).append(gif);
+      $(tile).removeClass('unfilled');
+      imgUrls.splice(randGIFIndex, 1);
+      let secondRandTileIndex = getRandomInt(0, availableTiles.length - 1);
+      let secondTile = availableTiles[secondRandTileIndex];
+      $(secondTile).append(gif);
+      $(secondTile).removeClass('unfilled');
     }
   }
 
+  function renderGifs2(shuffledURLs) {
+    let availableTiles = $('.unfilled'); // .tile plus .unfilled?
+    for (let url of shuffledURLs) {
+      let firstTile = pickRandomUnfilledTile();
+      let gif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      $(firstTile).append(gif);
+      $(firstTile).removeClass('unfilled');
+    }
+  }
 
+  function pickRandomUnfilledTile() {
+    let tileIndex = getRandomInt(0, $('.unfilled').length - 1);
+    let tile = $('.unfilled')[tileIndex];
+
+    return tile;
+  }
 
   // ---CREATION--- //
   createGrid();
@@ -80,9 +99,9 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(data) {
         for (let gif of data.results) {
-          GIFURLs.push(gif.media[0].gif.url);
+          gifUrls.push(gif.media[0].gif.url);
         }
-        renderGIFs(GIFURLs);
+        renderGifs2(gifUrls);
       }
     })
   })
