@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   // ---STATE--- //
 
-  let currentGif = '';
+  let currentGifElem = null;
   let currentTopic = '';
 
   // ---FUNCTIONS--- //
@@ -35,19 +35,18 @@ $(document).ready(function() {
 
   function renderGifs(shuffledURLs) {
     for (let url of shuffledURLs) {
-      let firstTile = pickRandomUnfilledTile();
-      let firstGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
-      $(firstTile).append(firstGif).removeClass('unfilled');
-      let secondTile = pickRandomUnfilledTile();
-      let secondGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
-      $(secondTile).append(secondGif).removeClass('unfilled');
+      for (let i = 0; i < 2; i++) {
+        let tile = pickRandomUnfilledTile();
+        let gif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
+        $(tile).append(gif).removeClass('unfilled');
+      }
     }
   }
 
   function shuffleArray(arr) {
     let newArr = [];
     for (let item of arr) {
-      let randIndex = getRandomInt(0, arr.length);
+      let randIndex = getRandomInt(0, newArr.length);
       newArr.splice(randIndex, 0, item)
     }
 
@@ -67,9 +66,12 @@ $(document).ready(function() {
   }
 
   function shuffleAndRenderGifs(gifUrls) {
-    let shuffledGifUrls = shuffleArray(gifUrls);
+    renderGifs(shuffleArray(gifUrls));
+  }
 
-    renderGifs(shuffledGifUrls);
+  function resetGrid() {
+    $('.tile').removeClass('matched').removeClass('hidden').addClass('shown').addClass('unfilled');
+    $('img').remove();
   }
 
   function getGifs(onSuccess) {
@@ -96,18 +98,17 @@ $(document).ready(function() {
   $('#gameboard').click(function(event) {
     let target = event.target;
     if ($(target).hasClass('tile')) {
-      let imgElem = ($(target).children('img'));
-      let imgUrl = ($(target).children('img').attr('src'));
-      if (currentGif === '') {
-        currentGif = imgElem;
-        console.log('currentGif =', currentGif);
+      let imgElem = $(target).children('img');
+      let imgUrl = $(target).children('img').attr('src');
+      if (currentGifElem === null) {
+        currentGifElem = imgElem;
         imgElem.removeClass('hidden').addClass('shown');
       }
-      else if (currentGif.attr('src') === imgUrl) {
+      else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
         imgElem.removeClass('hidden').addClass('shown');
 
-        //if it's the last match, display 'won' condition
+        // if it's the last match, display 'won' condition
         if ($('.matched').length === (rows * columns) - 2) {
           console.log('You won!');
           $('img').removeClass('hidden').addClass('shown');
@@ -117,20 +118,20 @@ $(document).ready(function() {
         else {
           window.setTimeout(function() {
             imgElem.removeClass('shown').addClass('hidden');
-            $(currentGif).removeClass('shown').addClass('hidden');
-            imgElem.removeClass('shown').parent().addClass('matched');
-            $(currentGif).removeClass('shown').parent().addClass('matched');
-            currentGif = '';
+            $(currentGifElem).removeClass('shown').addClass('hidden');
+            imgElem.parent().addClass('matched');
+            $(currentGifElem).parent().addClass('matched');
+            currentGifElem = null;
           }, 1000)
         }
       }
-      else if (currentGif.attr('src') !== imgUrl) {
+      else if (currentGifElem.attr('src') !== imgUrl) {
         console.log('Not a match');
         imgElem.removeClass('hidden').addClass('shown');
         window.setTimeout(function() {
           imgElem.removeClass('shown').addClass('hidden');
-          $(currentGif).removeClass('shown').addClass('hidden');
-          currentGif = '';
+          $(currentGifElem).removeClass('shown').addClass('hidden');
+          currentGifElem = null;
         }, 1000)
       }
     }
@@ -139,10 +140,12 @@ $(document).ready(function() {
   // AJAX search for GIFs upon search click
   $('#play-button').click(function(event) {
     event.preventDefault();
+
     currentTopic = $('#search').val();
     if (currentTopic === '') {
       console.log('You didn\'t enter anything');
     }
+
     hideWelcomeScreen();
     createGrid();
     getGifs(shuffleAndRenderGifs);
@@ -151,9 +154,9 @@ $(document).ready(function() {
   // play again
   $('#play-again-button').click(function(event) {
     event.preventDefault();
-    $('.tile').removeClass('matched').removeClass('hidden').addClass('shown').addClass('unfilled');
-    $('img').remove();
-    getGifs(shuffleAndRenderGifs);
+
     hidePlayAgain();
+    resetGrid();
+    getGifs(shuffleAndRenderGifs);
   })
 })
