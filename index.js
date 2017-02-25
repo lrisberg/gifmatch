@@ -92,6 +92,18 @@ $(document).ready(function() {
     });
   }
 
+  // -- Timer -- //
+
+  let gameTimer = setInterval(addOneSecond, 1000);
+  let time = 0;
+  
+  function addOneSecond() {
+    time += 1;
+    $('#timer').text(time);
+  }
+
+
+
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
@@ -144,7 +156,6 @@ $(document).ready(function() {
           let toHideElem = currentGifElem;
           window.setTimeout(function() {
             hideImages([imgElem, toHideElem]);
-            //hideImages(toHideElem);
           }, 1000)
         }
 
@@ -157,8 +168,6 @@ $(document).ready(function() {
         currentGifElem = null;
         window.setTimeout(function() {
           hideImages([imgElem, toHideElem]);
-          // hideImages(imgElem);
-          // hideImages(toHideElem);
         }, 1000)
       }
     }
