@@ -98,16 +98,22 @@ $(document).ready(function() {
 
   // ---EVENTS--- //
 
-  function showImages(imgElem) {
-    $(imgElem).removeClass('hidden').addClass('shown');
+  function showImages(imgElems) {
+    imgElems.forEach(function(imgElem) {
+      $(imgElem).removeClass('hidden').addClass('shown');
+    })
   }
 
-  function hideImages(imgElem) {
-    $(imgElem).removeClass('shown').addClass('hidden');
+  function hideImages(imgElems) {
+    imgElems.forEach(function(imgElem) {
+      $(imgElem).removeClass('shown').addClass('hidden');
+    })
   }
 
-  function matchTile(tile) {
-    $(tile).addClass('matched');
+  function matchTiles(tiles) {
+    tiles.forEach(function(tile) {
+      $(tile).addClass('matched');
+    })
   }
 
   function allTilesMatched() {
@@ -122,24 +128,23 @@ $(document).ready(function() {
 
       if (currentGifElem === null) {
         currentGifElem = imgElem;
-        showImages(imgElem);
+        showImages([imgElem]);
       }
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
-        showImages(imgElem);
-        matchTile(imgElem.parent());
-        matchTile(currentGifElem.parent());
+        showImages([imgElem]);
+        matchTiles([imgElem.parent(), currentGifElem.parent()]);
 
         if (allTilesMatched()) {
           console.log('You won!');
-          showImages($('img'));
+          showImages([$('img')]);
           showPlayAgain();
         }
         else {
           let toHideElem = currentGifElem;
           window.setTimeout(function() {
-            hideImages(imgElem);
-            hideImages(toHideElem);
+            hideImages([imgElem, toHideElem]);
+            //hideImages(toHideElem);
           }, 1000)
         }
 
@@ -147,12 +152,13 @@ $(document).ready(function() {
       }
       else {
         console.log('Not a match');
-        showImages(imgElem);
+        showImages([imgElem]);
         let toHideElem = currentGifElem;
         currentGifElem = null;
         window.setTimeout(function() {
-          hideImages(imgElem);
-          hideImages(toHideElem);
+          hideImages([imgElem, toHideElem]);
+          // hideImages(imgElem);
+          // hideImages(toHideElem);
         }, 1000)
       }
     }
