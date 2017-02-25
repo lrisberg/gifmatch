@@ -115,9 +115,9 @@ $(document).ready(function() {
   }
 
   $('#gameboard').click(function(event) {
-    let target = event.target;
-    if ($(target).hasClass('tile') && !$(target).hasClass('matched')) {
-      let imgElem = $(target).children('img');
+    let target = $(event.target);
+    if (target.hasClass('tile') && !target.hasClass('matched')) {
+      let imgElem = target.children('img');
       let imgUrl = imgElem.attr('src');
 
       if (currentGifElem === null) {
@@ -127,8 +127,8 @@ $(document).ready(function() {
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
         showImages(imgElem);
-        matchTile($(imgElem).parent());
-        matchTile($(currentGifElem).parent());
+        matchTile(imgElem.parent());
+        matchTile(currentGifElem.parent());
 
         if (allTilesMatched()) {
           console.log('You won!');
