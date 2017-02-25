@@ -1,8 +1,8 @@
 $(document).ready(function() {
   // INITIALIZATION //
 
-  const rows = 3;
-  const columns = 4;
+  const rows = 2;
+  const columns = 3;
 
   // ---STATE--- //
 
@@ -13,6 +13,7 @@ $(document).ready(function() {
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
+
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
@@ -27,6 +28,13 @@ $(document).ready(function() {
     }
   }
 
+  function pickRandomUnfilledTile() {
+    let tileIndex = getRandomInt(0, $('.unfilled').length - 1);
+    let tile = $('.unfilled')[tileIndex];
+
+    return tile;
+  }
+
   function renderGifs(shuffledURLs) {
     let availableTiles = $('.unfilled');
     for (let url of shuffledURLs) {
@@ -39,13 +47,6 @@ $(document).ready(function() {
       $(secondTile).append(secondGif);
       $(secondTile).removeClass('unfilled');
     }
-  }
-
-  function pickRandomUnfilledTile() {
-    let tileIndex = getRandomInt(0, $('.unfilled').length - 1);
-    let tile = $('.unfilled')[tileIndex];
-
-    return tile;
   }
 
   function shuffleArray(arr) {
@@ -82,13 +83,24 @@ $(document).ready(function() {
       else if (currentGif.attr('src') === imgUrl) {
         console.log('Its a match!');
         imgElem.removeClass('hidden').addClass('shown');
-        window.setTimeout(function() {
-          imgElem.removeClass('shown').addClass('hidden');
-          $(currentGif).removeClass('shown').addClass('hidden');
-          imgElem.removeClass('shown').parent().addClass('matched');
-          $(currentGif).removeClass('shown').parent().addClass('matched');
-          currentGif = '';
-        }, 1000)
+
+        //if it's the last match, display 'won' condition
+        if ($('.matched').length === (rows * columns) - 2) {
+          console.log('You won!');
+          $('img').removeClass('hidden').addClass('shown');
+          // add 'shown' to all tiles
+          // add play again button to the screen below the grid
+        }
+
+        else {
+          window.setTimeout(function() {
+            imgElem.removeClass('shown').addClass('hidden');
+            $(currentGif).removeClass('shown').addClass('hidden');
+            imgElem.removeClass('shown').parent().addClass('matched');
+            $(currentGif).removeClass('shown').parent().addClass('matched');
+            currentGif = '';
+          }, 1000)
+        }
       }
       else if (currentGif.attr('src') !== imgUrl) {
         console.log('Not a match');
@@ -101,26 +113,6 @@ $(document).ready(function() {
       }
     }
   })
-
-
-    // if ($(target).is('img')) {
-    //   let currentGif = $(target).attr('src');
-    //   console.log('currentGif =', currentGif);
-    //   $(target).toggleClass('hidden');
-    // }
-  //   if ($(target).hasClass('tile')) {
-  //     let img = ($(target).children('img'));
-  //     if (currentGif === '') {
-  //       currentGif = $(target).children('img').attr('src');
-  //       console.log('currentGif =', currentGif);
-  //       img.toggleClass('hidden');
-  //     }
-  //     else if (img.attr('src') === currentGif) {
-  //       console.log('That\'s a match!');
-  //       img.toggleClass('hidden');
-  //     }
-  //   }
-  // })
 
   // AJAX search for GIFs upon search click
   $('button').click(function(event) {
