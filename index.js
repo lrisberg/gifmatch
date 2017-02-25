@@ -64,8 +64,12 @@ $(document).ready(function() {
     return newArr;
   }
 
+  function createWelcomeScreen() {
+    
+  }
+
   // ---CREATION--- //
-  createGrid();
+  // createGrid();
 
   // ---EVENTS--- //
 
