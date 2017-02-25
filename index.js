@@ -1,10 +1,12 @@
 $(document).ready(function() {
   // INITIALIZATION //
 
-  const rows = 4;
-  const columns = 5;
+  const rows = 3;
+  const columns = 4;
 
   // ---STATE--- //
+
+  let currentGif = '';
 
   // ---FUNCTIONS--- //
 
@@ -25,23 +27,15 @@ $(document).ready(function() {
     }
   }
 
-  // Until there are no tiles left:
-  // 1. pick random GIF
-  // 2. pick a random tile, append the GIF to the tile
-  // 3. remove that tile from the pool of available tiles
-  // 4. pick another random tile, append the same GIF to the tile
-  // 5. remove that tile from the pool of available tiles
-  // 6. repeat
-
   function renderGifs(shuffledURLs) {
-    let availableTiles = $('.unfilled'); // .tile plus .unfilled?
+    let availableTiles = $('.unfilled');
     for (let url of shuffledURLs) {
       let firstTile = pickRandomUnfilledTile();
-      let firstGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      let firstGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
       $(firstTile).append(firstGif);
       $(firstTile).removeClass('unfilled');
       let secondTile = pickRandomUnfilledTile();
-      let secondGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      let secondGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
       $(secondTile).append(secondGif);
       $(secondTile).removeClass('unfilled');
     }
@@ -70,17 +64,48 @@ $(document).ready(function() {
 
   // ---EVENTS--- //
 
-  // toggle hide/show on tile/img click
+
+  // 1. click the first tile. Show the image and set the currentGif to that Gif.
+  // 2. click another tile. Show that img. If that img === currentGif, log 'It's a match!' and apply the class 'matched' to both images.
+  // 3. Reset the currentGif to ''.
+
   $('#gameboard').click(function(event) {
     let target = event.target;
-    if ($(target).is('img')) {
-      $(target).toggleClass('hidden');
-    }
-    else if ($(target).hasClass('tile')) {
-      let img = ($(target).children('img'));
-      img.toggleClass('hidden');
+    if ($(target).hasClass('tile')) {
+      let imgElem = ($(target).children('img'));
+      let imgUrl = ($(target).children('img').attr('src'));
+      if (currentGif === '') {
+        currentGif = imgUrl;
+        console.log('currentGif =', currentGif);
+        imgElem.removeClass('hidden').addClass('shown');
+      }
+      else if (currentGif === imgUrl) {
+        console.log('Its a match!');
+        imgElem.removeClass('hidden').addClass('shown');
+        currentGif = '';
+      }
     }
   })
+
+
+    // if ($(target).is('img')) {
+    //   let currentGif = $(target).attr('src');
+    //   console.log('currentGif =', currentGif);
+    //   $(target).toggleClass('hidden');
+    // }
+  //   if ($(target).hasClass('tile')) {
+  //     let img = ($(target).children('img'));
+  //     if (currentGif === '') {
+  //       currentGif = $(target).children('img').attr('src');
+  //       console.log('currentGif =', currentGif);
+  //       img.toggleClass('hidden');
+  //     }
+  //     else if (img.attr('src') === currentGif) {
+  //       console.log('That\'s a match!');
+  //       img.toggleClass('hidden');
+  //     }
+  //   }
+  // })
 
   // AJAX search for GIFs upon search click
   $('button').click(function(event) {

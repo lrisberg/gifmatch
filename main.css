@@ -17,6 +17,10 @@
   visibility: hidden;
 }
 
+.shown {
+  visibility: visible;
+}
+
 .welcome {
   padding-top: 200px;
 }
