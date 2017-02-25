@@ -95,42 +95,55 @@ $(document).ready(function() {
 
   // ---EVENTS--- //
 
+  function showImages(imgElem) {
+    $(imgElem).removeClass('hidden').addClass('shown');
+  }
+
+  function hideImages(imgElem) {
+    $(imgElem).removeClass('shown').addClass('hidden');
+  }
+
+  function matchTile(tile) {
+    $(tile).addClass('matched');
+  }
+
   $('#gameboard').click(function(event) {
     let target = event.target;
     if ($(target).hasClass('tile')) {
       let imgElem = $(target).children('img');
-      let imgUrl = $(target).children('img').attr('src');
+      let imgUrl = imgElem.attr('src');
+
       if (currentGifElem === null) {
         currentGifElem = imgElem;
-        imgElem.removeClass('hidden').addClass('shown');
+        showImages(imgElem);
       }
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
-        imgElem.removeClass('hidden').addClass('shown');
+        showImages(imgElem);
 
         // if it's the last match, display 'won' condition
         if ($('.matched').length === (rows * columns) - 2) {
           console.log('You won!');
-          $('img').removeClass('hidden').addClass('shown');
+          showImages($('img'));
           showPlayAgain();
         }
 
         else {
           window.setTimeout(function() {
-            imgElem.removeClass('shown').addClass('hidden');
-            $(currentGifElem).removeClass('shown').addClass('hidden');
-            imgElem.parent().addClass('matched');
-            $(currentGifElem).parent().addClass('matched');
+            hideImages(imgElem);
+            hideImages(currentGifElem);
+            matchTile($(imgElem).parent());
+            matchTile($(currentGifElem).parent());
             currentGifElem = null;
           }, 1000)
         }
       }
       else if (currentGifElem.attr('src') !== imgUrl) {
         console.log('Not a match');
-        imgElem.removeClass('hidden').addClass('shown');
+        showImages(imgElem);
         window.setTimeout(function() {
-          imgElem.removeClass('shown').addClass('hidden');
-          $(currentGifElem).removeClass('shown').addClass('hidden');
+          hideImages(imgElem);
+          hideImages(currentGifElem);
           currentGifElem = null;
         }, 1000)
       }
