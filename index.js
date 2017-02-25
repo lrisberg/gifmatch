@@ -2,11 +2,12 @@ $(document).ready(function() {
   // INITIALIZATION //
 
   const rows = 2;
-  const columns = 3;
+  const columns = 2;
 
   // ---STATE--- //
 
   let currentGif = '';
+  let currentTopic = '';
 
   // ---FUNCTIONS--- //
 
@@ -71,6 +72,23 @@ $(document).ready(function() {
     $('.play-again').hide();
   }
 
+  function getGifs() {
+    $.ajax({
+      method: 'GET',
+      url: `https://api.tenor.co/v1/search?tag=${currentTopic}`,
+      dataType: 'json',
+      success: function(data) {
+        let gifUrls = [];
+        for (let gif of data.results) {
+          gifUrls.push(gif.media[0].gif.url);
+        }
+        let shuffledGifUrls = shuffleArray(gifUrls);
+
+        renderGifs(shuffledGifUrls);
+      }
+    })
+  }
+
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
@@ -121,26 +139,22 @@ $(document).ready(function() {
   })
 
   // AJAX search for GIFs upon search click
-  $('button').click(function(event) {
+  $('#play-button').click(function(event) {
     event.preventDefault();
-    let userSearch = $('#search').val();
-    if (userSearch === '') {
+    currentTopic = $('#search').val();
+    if (currentTopic === '') {
       console.log('You didn\'t enter anything');
     }
-    $.ajax({
-      method: 'GET',
-      url: `https://api.tenor.co/v1/search?tag=${userSearch}`,
-      dataType: 'json',
-      success: function(data) {
-        let gifUrls = [];
-        for (let gif of data.results) {
-          gifUrls.push(gif.media[0].gif.url);
-        }
-        let shuffledGifUrls = shuffleArray(gifUrls);
-        hideWelcomeScreen();
-        createGrid();
-        renderGifs(shuffledGifUrls);
-      }
-    })
+    hideWelcomeScreen();
+    createGrid();
+    getGifs();
+  })
+
+  // play again
+  $('#play-again-button').click(function(event) {
+    event.preventDefault();
+    $('.tile').removeClass('matched').removeClass('hidden').addClass('shown').addClass('unfilled');
+    $('img').remove();
+    getGifs();
   })
 })
