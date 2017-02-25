@@ -16,10 +16,10 @@ $(document).ready(function() {
 
   function createGrid() {
     for (let i = 0; i < rows; i++) {
-      let row = $('<div>').addClass('row tile-row');
+      let row = $('<div>').addClass('tile-row');
       $('#gameboard').append(row);
       for (let j = 0; j < columns; j++) {
-        let tile = $('<div>').addClass('col tile unfilled');
+        let tile = $('<div>').addClass('tile unfilled');
         row.append(tile);
       }
     }
@@ -76,7 +76,7 @@ $(document).ready(function() {
     if ($(target).is('img')) {
       $(target).toggleClass('hidden');
     }
-    if ($(target).hasClass('tile')) {
+    else if ($(target).hasClass('tile')) {
       let img = ($(target).children('img'));
       img.toggleClass('hidden');
     }

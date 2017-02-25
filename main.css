@@ -6,6 +6,7 @@
   border: 1px solid black;
   height: 150px;
   width: 150px;
+  float: left;
 }
 
 .tile-row {
@@ -13,7 +14,7 @@
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
 }
 
 .welcome {
