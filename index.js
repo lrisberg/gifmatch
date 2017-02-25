@@ -75,14 +75,23 @@ $(document).ready(function() {
       let imgElem = ($(target).children('img'));
       let imgUrl = ($(target).children('img').attr('src'));
       if (currentGif === '') {
-        currentGif = imgUrl;
+        currentGif = imgElem;
         console.log('currentGif =', currentGif);
         imgElem.removeClass('hidden').addClass('shown');
       }
-      else if (currentGif === imgUrl) {
+      else if (currentGif.attr('src') === imgUrl) {
         console.log('Its a match!');
         imgElem.removeClass('hidden').addClass('shown');
         currentGif = '';
+      }
+      else if (currentGif.attr('src') !== imgUrl) {
+        console.log('Not a match');
+        imgElem.removeClass('hidden').addClass('shown');
+        window.setTimeout(function() {
+          imgElem.removeClass('shown').addClass('hidden');
+          $(currentGif).removeClass('shown').addClass('hidden');
+          currentGif = '';
+        }, 1500)
       }
     }
   })
