@@ -4,8 +4,6 @@ $(document).ready(function() {
   const rows = 4;
   const columns = 5;
 
-  let gifUrls = [];
-
   // ---STATE--- //
 
   // ---FUNCTIONS--- //
@@ -56,6 +54,16 @@ $(document).ready(function() {
     return tile;
   }
 
+  function shuffleArray(arr) {
+    let newArr = [];
+    for (let item of arr) {
+      let randIndex = getRandomInt(0, arr.length);
+      newArr.splice(randIndex, 0, item)
+    }
+
+    return newArr;
+  }
+
   // ---CREATION--- //
   createGrid();
 
@@ -85,10 +93,12 @@ $(document).ready(function() {
       url: `https://api.tenor.co/v1/search?tag=${userSearch}`,
       dataType: 'json',
       success: function(data) {
+        let gifUrls = [];
         for (let gif of data.results) {
           gifUrls.push(gif.media[0].gif.url);
         }
-        renderGifs(gifUrls);
+        let shuffledGifUrls = shuffleArray(gifUrls);
+        renderGifs(shuffledGifUrls);
       }
     })
   })
