@@ -64,12 +64,9 @@ $(document).ready(function() {
     return newArr;
   }
 
-  function createWelcomeScreen() {
-    
+  function hideWelcomeScreen() {
+    $('#welcome-screen').hide();
   }
-
-  // ---CREATION--- //
-  // createGrid();
 
   // ---EVENTS--- //
 
@@ -102,6 +99,8 @@ $(document).ready(function() {
           gifUrls.push(gif.media[0].gif.url);
         }
         let shuffledGifUrls = shuffleArray(gifUrls);
+        hideWelcomeScreen();
+        createGrid();
         renderGifs(shuffledGifUrls);
       }
     })
