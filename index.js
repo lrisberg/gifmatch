@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  // ZE RULES
+  // Only change state in event handlers.
+
   // INITIALIZATION //
 
   const rows = 2;
@@ -107,9 +110,13 @@ $(document).ready(function() {
     $(tile).addClass('matched');
   }
 
+  function allTilesMatched() {
+    return $('.matched').length === (rows * columns);
+  }
+
   $('#gameboard').click(function(event) {
     let target = event.target;
-    if ($(target).hasClass('tile')) {
+    if ($(target).hasClass('tile') && !$(target).hasClass('matched')) {
       let imgElem = $(target).children('img');
       let imgUrl = imgElem.attr('src');
 
@@ -120,29 +127,25 @@ $(document).ready(function() {
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
         showImages(imgElem);
+        matchTile($(imgElem).parent());
+        matchTile($(currentGifElem).parent());
 
-        // if it's the last match, display 'won' condition
-        if ($('.matched').length === (rows * columns) - 2) {
-          matchTile($(imgElem).parent());
-          matchTile($(currentGifElem).parent());
+        if (allTilesMatched()) {
           console.log('You won!');
           showImages($('img'));
           showPlayAgain();
-          currentGifElem = null;
         }
-
         else {
-          matchTile($(imgElem).parent());
-          matchTile($(currentGifElem).parent());
           let toHideElem = currentGifElem;
-          currentGifElem = null;
           window.setTimeout(function() {
             hideImages(imgElem);
             hideImages(toHideElem);
           }, 1000)
         }
+
+        currentGifElem = null;
       }
-      else if (currentGifElem.attr('src') !== imgUrl) {
+      else {
         console.log('Not a match');
         showImages(imgElem);
         let toHideElem = currentGifElem;
