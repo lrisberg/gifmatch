@@ -35,30 +35,17 @@ $(document).ready(function() {
   // 5. remove that tile from the pool of available tiles
   // 6. repeat
 
-  function renderGIFs(imgUrls) {
-    let availableTiles = $('.unfilled'); // .tile plus .unfilled?
-    for (let i = 0; i < availableTiles.length; i++) {
-      let randGIFIndex = getRandomInt(0, imgUrls.length - 1);
-      let gif = $('<img>').attr('src', imgUrls[randGIFIndex]).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
-      let randTileIndex = getRandomInt(0, availableTiles.length - 1);
-      let tile = availableTiles[randTileIndex];
-      $(tile).append(gif);
-      $(tile).removeClass('unfilled');
-      imgUrls.splice(randGIFIndex, 1);
-      let secondRandTileIndex = getRandomInt(0, availableTiles.length - 1);
-      let secondTile = availableTiles[secondRandTileIndex];
-      $(secondTile).append(gif);
-      $(secondTile).removeClass('unfilled');
-    }
-  }
-
-  function renderGifs2(shuffledURLs) {
+  function renderGifs(shuffledURLs) {
     let availableTiles = $('.unfilled'); // .tile plus .unfilled?
     for (let url of shuffledURLs) {
       let firstTile = pickRandomUnfilledTile();
-      let gif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
-      $(firstTile).append(gif);
+      let firstGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      $(firstTile).append(firstGif);
       $(firstTile).removeClass('unfilled');
+      let secondTile = pickRandomUnfilledTile();
+      let secondGif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px'); // .addClass('hidden');
+      $(secondTile).append(secondGif);
+      $(secondTile).removeClass('unfilled');
     }
   }
 
@@ -101,7 +88,7 @@ $(document).ready(function() {
         for (let gif of data.results) {
           gifUrls.push(gif.media[0].gif.url);
         }
-        renderGifs2(gifUrls);
+        renderGifs(gifUrls);
       }
     })
   })
