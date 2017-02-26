@@ -92,21 +92,46 @@ $(document).ready(function() {
     });
   }
 
-  // -- Timer -- //
-
-  let gameTimer = setInterval(addOneSecond, 1000);
-  let time = 0;
-  
-  function addOneSecond() {
-    time += 1;
-    $('#timer').text(time);
+  function showTimer() {
+    $('#timer').show();
   }
 
+  function hideTimer() {
+    $('#timer').hide();
+  }
 
+  // -- Timer -- //
+  let gameStartedAt = null;
+  let gameEndedAt = null;
+
+  function getCurrentDuration() {
+    return new Date().valueOf() - gameStartedAt.valueOf();
+  }
+
+  setInterval(() => {
+    if (gameStartedAt !== null && gameEndedAt === null) {
+      let duration = (getCurrentDuration() / 1000).toFixed(2);
+      $('#timer').text(duration);
+    }
+  }, 100);
+
+  function stopTimer() {
+    gameEndedAt = new Date();
+  }
+
+  function startTimer() {
+    gameStartedAt = new Date();
+    gameEndedAt = null;
+  }
+
+  function calculateGameTime() {
+    return gameEndedAt.valueOf() - gameStartedAt.valueOf();
+  }
 
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
+  hideTimer();
 
   // ---EVENTS--- //
 
@@ -151,6 +176,8 @@ $(document).ready(function() {
           console.log('You won!');
           showImages([$('img')]);
           showPlayAgain();
+          stopTimer();
+          console.log(calculateGameTime());
         }
         else {
           let toHideElem = currentGifElem;
@@ -185,6 +212,8 @@ $(document).ready(function() {
     hideWelcomeScreen();
     createGrid();
     getGifs(shuffleAndRenderGifs);
+    showTimer();
+    startTimer();
   })
 
   // play again
@@ -194,5 +223,6 @@ $(document).ready(function() {
     hidePlayAgain();
     resetGrid();
     getGifs(shuffleAndRenderGifs);
+    startTimer();
   })
 })
