@@ -11,6 +11,7 @@ $(document).ready(function() {
 
   let currentGifElem = null;
   let currentTopic = '';
+  let canClick = true;
 
   // ---FUNCTIONS--- //
 
@@ -40,7 +41,7 @@ $(document).ready(function() {
     for (let url of shuffledURLs) {
       for (let i = 0; i < 2; i++) {
         let tile = pickRandomUnfilledTile();
-        let gif = $('<img>').attr('src', url).attr('height', '150px').attr('width', '150px').addClass('hidden');
+        let gif = $('<img>').attr('src', url).addClass('hidden');
         $(tile).append(gif).removeClass('unfilled');
       }
     }
@@ -158,6 +159,10 @@ $(document).ready(function() {
   }
 
   $('#gameboard').click(function(event) {
+    if (canClick === false) {
+      return;
+    }
+
     let target = $(event.target);
     if (target.hasClass('tile') && !target.hasClass('matched')) {
       let imgElem = target.children('img');
@@ -181,8 +186,10 @@ $(document).ready(function() {
         }
         else {
           let toHideElem = currentGifElem;
+          canClick = false;
           window.setTimeout(function() {
             hideImages([imgElem, toHideElem]);
+            canClick = true;
           }, 1000)
         }
 
@@ -193,7 +200,9 @@ $(document).ready(function() {
         showImages([imgElem]);
         let toHideElem = currentGifElem;
         currentGifElem = null;
+        canClick = false;
         window.setTimeout(function() {
+          canClick = true;
           hideImages([imgElem, toHideElem]);
         }, 1000)
       }

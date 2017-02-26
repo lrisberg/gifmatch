@@ -4,11 +4,14 @@ img {
     user-select: none;
 }
 
+img, .tile {
+  height: 150px;
+  width: 170px;
+}
+
 .tile {
     background-color: grey;
     border: 1px solid black;
-    height: 150px;
-    width: 150px;
     float: left;
 }
 
