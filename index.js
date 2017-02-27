@@ -103,6 +103,19 @@ $(document).ready(function() {
     $('#timer').hide();
   }
 
+  function hideSelect() {
+    $('select').hide();
+  }
+
+  function createSearchInput() {
+    let div = $('<div>').addClass('input-field col offset-l4 l4');
+    $('form').append(div);
+    let input = $('<input id="search" type="search" placeholder="Search GIFs">');
+    let label = $('<label class="label-icon" for="search">');
+    let icon = $('<i class="material-icons">').text('search')
+    div.append(input, label, icon)
+  }
+
   // -- Timer -- //
   let gameStartedAt = null;
   let gameEndedAt = null;
@@ -214,7 +227,6 @@ $(document).ready(function() {
   // AJAX search for GIFs upon search click
   $('#play-button').click(function(event) {
     event.preventDefault();
-    console.log($('#user-select option:selected').val());
     currentTopic = $('#user-select option:selected').val();
 
     hideWelcomeScreen();

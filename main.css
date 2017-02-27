@@ -1,9 +1,15 @@
 * {
   font-family: 'Luckiest Guy', cursive;
+  background-color: black;
 }
 
 h1 {
   font-size: 175px;
+  color: #FB686C;
+}
+
+#welcome-screen {
+  color: #FDF073;
 }
 
 img {
@@ -42,3 +48,21 @@ img, .tile {
 .welcome {
     padding-top: 125px;
 }
+
+.select-wrapper input.select-dropdown {
+  font-size: 25px;
+}
+
+.btn {
+  background-color: #3DFC9F;
+  color: black;
+}
+
+/*red: #FB686C
+yellow: #FDF073
+green: #3DFC9F
+blue: #34CDFC
+purple: #984AF8*/
+
+/*blueish background: #96B0A3
+text: #D5654C*/
