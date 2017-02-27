@@ -57,7 +57,19 @@
                 <!-- <label>Materialize Select</label> -->
               </div>
 
+      <div class="row center">
+        <h3>Difficulty:</h3>
 
+        <div class="input-field col offset-l3 l3">
+          <select id="difficulty">
+      <option value="easy" selected>Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+      </select>
+          <!-- <label>Materialize Select</label> -->
+        </div>
+
+      </div>
 
               <button id="play-button" class="btn waves-effect waves-light" type="submit" name="action">PLAY!
 </button>
@@ -73,22 +85,29 @@
   <!-- GAME GRID -->
   <div class="container">
     <div class="row">
+
+
+
       <div id="gameboard" class="container">
       </div>
+
+      <div id="timer">
+      </div>
+
+
+
+      <div class="play-again container">
+        <div class="row center">
+          <h3>You Won! Play again?</h3>
+          <button id="play-again-button" class="btn waves-effect waves-light" type="submit" name="action">Play Again!
+    </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div id="timer">
-  </div>
 
-  <div class="play-again container">
-    <div class="row">
-      <h3>You Won! Play again?</h3>
-      <button id="play-again-button" class="btn waves-effect waves-light" type="submit" name="action">Play Again!
-<i class="material-icons right">send</i>
-</button>
-    </div>
-  </div>
 
 </body>
 

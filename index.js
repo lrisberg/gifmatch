@@ -6,14 +6,15 @@ $(document).ready(function() {
 
   $('select').material_select();
 
-  const rows = 3;
-  const columns = 4;
+  let rows = 3;
+  let columns = 4;
 
   // ---STATE--- //
 
   let currentGifElem = null;
   let currentTopic = '';
   let canClick = true;
+  let difficulty = null;
 
   // ---FUNCTIONS--- //
 
@@ -144,13 +145,6 @@ $(document).ready(function() {
     return gameEndedAt.valueOf() - gameStartedAt.valueOf();
   }
 
-  // --- INITIALIZATION--- //
-
-  hidePlayAgain();
-  hideTimer();
-
-  // ---EVENTS--- //
-
   function showImages(imgElems) {
     imgElems.forEach(function(imgElem) {
       $(imgElem).removeClass('hidden').addClass('shown');
@@ -172,6 +166,28 @@ $(document).ready(function() {
   function allTilesMatched() {
     return $('.matched').length === (rows * columns);
   }
+
+  function updateGridSize() {
+    if (difficulty === "easy") {
+      rows = 3;
+      columns = 2;
+    }
+    else if (difficulty === "medium") {
+      rows = 4;
+      columns = 3;
+    }
+    else if (difficulty === "hard") {
+      rows = 5;
+      columns = 4;
+    }
+  }
+
+  // --- INITIALIZATION--- //
+
+  hidePlayAgain();
+  hideTimer();
+
+  // ---EVENTS--- //
 
   $('#gameboard').click(function(event) {
     if (canClick === false) {
@@ -227,9 +243,16 @@ $(document).ready(function() {
   // AJAX search for GIFs upon search click
   $('#play-button').click(function(event) {
     event.preventDefault();
-    currentTopic = $('#user-select option:selected').val();
+    if ($('#user-select option:selected').val() === 'random') {
+      currentTopic = '';
+    }
+    else {
+      currentTopic = $('#user-select option:selected').val();
+    }
+    difficulty = $('#difficulty option:selected').val()
 
     hideWelcomeScreen();
+    updateGridSize();
     createGrid();
     getGifs(shuffleAndRenderGifs);
     showTimer();

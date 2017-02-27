@@ -8,7 +8,7 @@ h1 {
   color: #FB686C;
 }
 
-#welcome-screen {
+h3 {
   color: #FDF073;
 }
 
@@ -42,7 +42,7 @@ img, .tile {
 }
 
 .matched {
-    background-color: white;
+    background-color: black;
 }
 
 .welcome {
@@ -56,6 +56,27 @@ img, .tile {
 .btn {
   background-color: #3DFC9F;
   color: black;
+}
+
+input {
+  color: #3DFC9F;
+}
+
+#timer {
+  color: #34CDFC;
+  font-size: 30px;
+}
+
+#gameboard {
+  padding-top: 150px;
+}
+
+.select-wrapper input.select-dropdown {
+  border-bottom: 1px solid #FDF073;
+}
+
+ul.dropdown-content.select-dropdown li span {
+    color: #3DFC9F;
 }
 
 /*red: #FB686C
