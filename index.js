@@ -4,8 +4,10 @@ $(document).ready(function() {
 
   // INITIALIZATION //
 
-  const rows = 2;
-  const columns = 2;
+  $('select').material_select();
+
+  const rows = 3;
+  const columns = 4;
 
   // ---STATE--- //
 
@@ -81,7 +83,7 @@ $(document).ready(function() {
   function getGifs(onSuccess) {
     $.ajax({
       method: 'GET',
-      url: `https://api.tenor.co/v1/search?tag=${currentTopic}`,
+      url: `https://api.tenor.co/v1/search?tag=${currentTopic}&limit=50`,
       dataType: 'json',
       success: function(data) {
         let gifUrls = [];
@@ -212,11 +214,8 @@ $(document).ready(function() {
   // AJAX search for GIFs upon search click
   $('#play-button').click(function(event) {
     event.preventDefault();
-
-    currentTopic = $('#search').val();
-    if (currentTopic === '') {
-      console.log('You didn\'t enter anything');
-    }
+    console.log($('#user-select option:selected').val());
+    currentTopic = $('#user-select option:selected').val();
 
     hideWelcomeScreen();
     createGrid();

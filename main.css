@@ -1,3 +1,11 @@
+* {
+  font-family: 'Luckiest Guy', cursive;
+}
+
+h1 {
+  font-size: 175px;
+}
+
 img {
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -32,5 +40,5 @@ img, .tile {
 }
 
 .welcome {
-    padding-top: 200px;
+    padding-top: 125px;
 }
