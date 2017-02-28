@@ -169,7 +169,7 @@ $(document).ready(function() {
 
   function updateGridSize() {
     if (difficulty === "easy") {
-      rows = 3;
+      rows = 2;
       columns = 2;
     }
     else if (difficulty === "medium") {

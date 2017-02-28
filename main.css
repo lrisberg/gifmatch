@@ -46,7 +46,7 @@ img, .tile {
 }
 
 .welcome {
-    padding-top: 125px;
+    padding-top: 75px;
 }
 
 .select-wrapper input.select-dropdown {
@@ -73,10 +73,15 @@ input {
 
 .select-wrapper input.select-dropdown {
   border-bottom: 1px solid #FDF073;
+  width: 50%;
 }
 
 ul.dropdown-content.select-dropdown li span {
     color: #3DFC9F;
+}
+
+select {
+  width: 50%;
 }
 
 /*red: #FB686C
