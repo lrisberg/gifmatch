@@ -46,7 +46,7 @@ img, .tile {
 }
 
 .welcome {
-    padding-top: 75px;
+    padding-top: 30px;
 }
 
 .select-wrapper input.select-dropdown {
@@ -69,6 +69,21 @@ input {
 
 #gameboard {
   padding-top: 150px;
+  margin-bottom: 200px;
+}
+
+#play-button {
+  height: 100px;
+  width: 300px;
+  font-size: 60px;
+  padding-top: 15px;
+}
+
+#play-again-button {
+  height: 100px;
+  width: 300px;
+  font-size: 40px;
+  padding-top: 15px;
 }
 
 .select-wrapper input.select-dropdown {
