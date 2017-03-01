@@ -165,12 +165,12 @@ $(document).ready(function() {
       columns = 2;
     }
     else if (difficulty === "medium") {
-      rows = 4;
-      columns = 3;
+      rows = 3;
+      columns = 4;
     }
     else if (difficulty === "hard") {
-      rows = 5;
-      columns = 4;
+      rows = 4;
+      columns = 5;
     }
   }
 

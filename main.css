@@ -29,13 +29,14 @@ img {
 .tile {
     background-color: #eceff1;
     border: 3px solid #90a4ae;
-    float: left;
     height: 156px;
     width: 176px;
+    display: inline-block;
 }
 
 .tile-row {
     margin-bottom: 0px;
+    height: 156px;
 }
 
 .hidden {
@@ -70,12 +71,11 @@ input {
 #timer {
   color: #34CDFC;
   font-size: 30px;
-  text-align: center;
 }
 
 #gameboard {
-  padding-top: 150px;
-  margin-bottom: 200px;
+  padding-top: 50px;
+  margin-bottom: 50px;
 }
 
 #play-button {
