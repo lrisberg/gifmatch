@@ -65,6 +65,8 @@ $(document).ready(function() {
   }
 
   function showPlayAgain() {
+    let time = $('#timer').text();
+    $('#you-won').text(`You won in ${time} seconds`);
     $('.play-again').show();
   }
 
@@ -107,6 +109,14 @@ $(document).ready(function() {
     let label = $('<label class="label-icon" for="search">');
     let icon = $('<i class="material-icons">').text('search')
     div.append(input, label, icon)
+  }
+
+  function hideTimer() {
+    $('#timer').hide();
+  }
+
+  function showTimer() {
+    $('#timer').show();
   }
 
   // -- Timer -- //
@@ -220,6 +230,7 @@ $(document).ready(function() {
         if (allTilesMatched()) {
           console.log('You won!');
           showImages([$('img')]);
+          hideTimer();
           showPlayAgain();
           stopTimer();
           console.log(calculateGameTime());
@@ -273,6 +284,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     hidePlayAgain();
+    showTimer();
     resetGrid();
     getGifs(shuffleAndRenderGifs);
     startTimer();

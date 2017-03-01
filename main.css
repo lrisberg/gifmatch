@@ -37,6 +37,7 @@ img {
 .tile-row {
     margin-bottom: 0px;
     height: 156px;
+    white-space: nowrap;
 }
 
 .hidden {
@@ -74,8 +75,8 @@ input {
 }
 
 #gameboard {
-  padding-top: 50px;
-  margin-bottom: 50px;
+  padding-top: 25px;
+  margin-bottom: 25px;
 }
 
 #play-button {
@@ -87,10 +88,14 @@ input {
 }
 
 #play-again-button {
-  height: 100px;
-  width: 300px;
-  font-size: 40px;
-  padding-top: 15px;
+  height: 70px;
+  width: 250px;
+  font-size: 35px;
+  padding-top: 10px;
+}
+
+#you-won {
+  margin-bottom: 5px;
 }
 
 .select-wrapper input.select-dropdown, #custom-search input {
