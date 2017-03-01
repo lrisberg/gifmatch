@@ -96,14 +96,6 @@ $(document).ready(function() {
     });
   }
 
-  function showTimer() {
-    $('#timer').show();
-  }
-
-  function hideTimer() {
-    $('#timer').hide();
-  }
-
   function hideSelect() {
     $('select').hide();
   }
@@ -190,10 +182,18 @@ $(document).ready(function() {
     $('#custom-search').hide();
   }
 
+  function hideGameScreen() {
+    $('#game-screen').hide();
+  }
+
+  function showGameScreen() {
+    $('#game-screen').show();
+  }
+
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
-  hideTimer();
+  hideGameScreen();
   hideSearch();
 
   // ---EVENTS--- //
@@ -261,10 +261,10 @@ $(document).ready(function() {
     difficulty = $('#difficulty option:selected').val()
 
     hideWelcomeScreen();
+    showGameScreen();
     updateGridSize();
     createGrid();
     getGifs(shuffleAndRenderGifs);
-    showTimer();
     startTimer();
   })
 

@@ -7,6 +7,10 @@ h1 {
   color: #FB686C;
 }
 
+h2 {
+  color: #FB686C;
+}
+
 h3 {
   color: #FDF073;
 }
@@ -23,8 +27,8 @@ img {
 }
 
 .tile {
-    background-color: white;
-    border: 3px solid grey;
+    background-color: #eceff1;
+    border: 3px solid #90a4ae;
     float: left;
     height: 156px;
     width: 176px;
@@ -66,6 +70,7 @@ input {
 #timer {
   color: #34CDFC;
   font-size: 30px;
+  text-align: center;
 }
 
 #gameboard {
