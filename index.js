@@ -19,6 +19,9 @@ $(document).ready(function() {
   let gameStartedAt = null;
   let gameEndedAt = null;
 
+  let missed = 0;
+  let seenGifs = [];
+
   // ---FUNCTIONS--- //
 
   function showSearch() {
@@ -237,6 +240,16 @@ $(document).ready(function() {
       }
       else {
         console.log('Not a match');
+
+        // add +1 to 'missed'
+        if (seenGifs.includes(imgElem.attr('src'))) {
+          missed += 1;
+        }
+
+        seenGifs.push(imgElem.attr('src'));
+        seenGifs.push(currentGifElem.attr('src'));
+
+        console.log('missed =', missed);
         showImages([imgElem]);
         let toHideElem = currentGifElem;
         currentGifElem = null;
@@ -254,15 +267,12 @@ $(document).ready(function() {
     event.preventDefault();
     if ($('#user-select option:selected').val() === 'random') {
       currentTopic = '';
-      console.log(currentTopic);
     }
     else if ($('#user-select option:selected').val() === 'custom') {
       currentTopic = $('#search').val();
-      console.log(currentTopic);
     }
     else {
       currentTopic = $('#user-select option:selected').val();
-      console.log(currentTopic);
     }
     difficulty = $('#difficulty option:selected').val()
 

@@ -5,7 +5,7 @@
 h1 {
   font-size: 175px;
   color: #FE7E00;
-  text-shadow: -2px 0 #263238, 0 2px #263238, 2px 0 #263238, 0 -2px #263238;
+  text-shadow: -3px 0 #263238, 0 3px #263238, 3px 0 #263238, 0 -3px #263238;
 }
 
 #2D2E2E
@@ -74,6 +74,10 @@ input {
 
 #timer {
   color: #263238;
+  font-size: 30px;
+}
+
+#missed {
   font-size: 30px;
 }
 
