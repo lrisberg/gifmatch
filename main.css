@@ -1,18 +1,28 @@
 * {
   font-family: 'Luckiest Guy', cursive;
+  background-color: #ECE6CE;
+}
+
+#ECE6CE
+#546e7a
+
+body {
+  background-color: #ECE6CE;
 }
 
 h1 {
   font-size: 175px;
-  color: #FB686C;
+  color: #FE7E00;
 }
 
+#2D2E2E
+
 h2 {
-  color: #FB686C;
+  color: #263238;
 }
 
 h3 {
-  color: #FDF073;
+  color: #2D2E2E;
 }
 
 img {
@@ -61,12 +71,12 @@ img {
 }
 
 .btn {
-  background-color: #3DFC9F;
+  background-color: #FE7E00;
   color: #263238;
 }
 
 input {
-  color: #3DFC9F;
+  color: #2D2E2E;
 }
 
 #timer {
@@ -99,11 +109,11 @@ input {
 }
 
 .select-wrapper input.select-dropdown, #custom-search input {
-  border-bottom: 1px solid #FDF073;
+  border-bottom: 1px solid #2D2E2E;
 }
 
 ul.dropdown-content.select-dropdown li span {
-    color: #3DFC9F;
+    color: #263238;
 }
 
 select {
@@ -113,12 +123,6 @@ select {
 .row {
   margin-bottom: 0px;
 }
-
-/*red: #FB686C
-yellow: #FDF073
-green: #3DFC9F
-blue: #34CDFC
-purple: #984AF8*/
 
 /*blueish background: #96B0A3
 text: #D5654C*/
