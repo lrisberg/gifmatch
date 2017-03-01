@@ -282,5 +282,8 @@ $(document).ready(function() {
     if ($('#user-select').val() === 'custom') {
       showSearch();
     }
+    else if ($('#user-select').val() !== 'custom') {
+      hideSearch();
+    }
   });
 })
