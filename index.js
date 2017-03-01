@@ -16,7 +16,60 @@ $(document).ready(function() {
   let canClick = true;
   let difficulty = null;
 
+  let gameStartedAt = null;
+  let gameEndedAt = null;
+
   // ---FUNCTIONS--- //
+
+  function showSearch() {
+    $('#custom-search').show();
+  }
+
+  function hideSearch() {
+    $('#custom-search').hide();
+  }
+
+  function hideGameScreen() {
+    $('#game-screen').hide();
+  }
+
+  function showGameScreen() {
+    $('#game-screen').show();
+  }
+
+  function hideWelcomeScreen() {
+    $('#welcome-screen').hide();
+  }
+
+  function showPlayAgain() {
+    let time = $('#timer').text();
+    $('#you-won').text(`You won in ${time} seconds`);
+    $('.play-again').show();
+  }
+
+  function hidePlayAgain() {
+    $('.play-again').hide();
+  }
+
+  function hideTimer() {
+    $('#timer').hide();
+  }
+
+  function showTimer() {
+    $('#timer').show();
+  }
+
+  function showImages(imgElems) {
+    imgElems.forEach(function(imgElem) {
+      $(imgElem).removeClass('hidden').addClass('shown');
+    })
+  }
+
+  function hideImages(imgElems) {
+    imgElems.forEach(function(imgElem) {
+      $(imgElem).removeClass('shown').addClass('hidden');
+    })
+  }
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -60,20 +113,6 @@ $(document).ready(function() {
     return newArr;
   }
 
-  function hideWelcomeScreen() {
-    $('#welcome-screen').hide();
-  }
-
-  function showPlayAgain() {
-    let time = $('#timer').text();
-    $('#you-won').text(`You won in ${time} seconds`);
-    $('.play-again').show();
-  }
-
-  function hidePlayAgain() {
-    $('.play-again').hide();
-  }
-
   function shuffleAndRenderGifs(gifUrls) {
     renderGifs(shuffleArray(gifUrls));
   }
@@ -96,67 +135,6 @@ $(document).ready(function() {
         onSuccess(gifUrls);
       }
     });
-  }
-
-  function hideSelect() {
-    $('select').hide();
-  }
-
-  function createSearchInput() {
-    let div = $('<div>').addClass('input-field col offset-l4 l4');
-    $('form').append(div);
-    let input = $('<input id="search" type="search" placeholder="Search GIFs">');
-    let label = $('<label class="label-icon" for="search">');
-    let icon = $('<i class="material-icons">').text('search')
-    div.append(input, label, icon)
-  }
-
-  function hideTimer() {
-    $('#timer').hide();
-  }
-
-  function showTimer() {
-    $('#timer').show();
-  }
-
-  // -- Timer -- //
-  let gameStartedAt = null;
-  let gameEndedAt = null;
-
-  function getCurrentDuration() {
-    return new Date().valueOf() - gameStartedAt.valueOf();
-  }
-
-  setInterval(() => {
-    if (gameStartedAt !== null && gameEndedAt === null) {
-      let duration = (getCurrentDuration() / 1000).toFixed(2);
-      $('#timer').text(duration);
-    }
-  }, 100);
-
-  function stopTimer() {
-    gameEndedAt = new Date();
-  }
-
-  function startTimer() {
-    gameStartedAt = new Date();
-    gameEndedAt = null;
-  }
-
-  function calculateGameTime() {
-    return gameEndedAt.valueOf() - gameStartedAt.valueOf();
-  }
-
-  function showImages(imgElems) {
-    imgElems.forEach(function(imgElem) {
-      $(imgElem).removeClass('hidden').addClass('shown');
-    })
-  }
-
-  function hideImages(imgElems) {
-    imgElems.forEach(function(imgElem) {
-      $(imgElem).removeClass('shown').addClass('hidden');
-    })
   }
 
   function matchTiles(tiles) {
@@ -184,20 +162,30 @@ $(document).ready(function() {
     }
   }
 
-  function showSearch() {
-    $('#custom-search').show();
+  // -- Timer -- //
+
+  function getCurrentDuration() {
+    return new Date().valueOf() - gameStartedAt.valueOf();
   }
 
-  function hideSearch() {
-    $('#custom-search').hide();
+  setInterval(() => {
+    if (gameStartedAt !== null && gameEndedAt === null) {
+      let duration = (getCurrentDuration() / 1000).toFixed(2);
+      $('#timer').text(duration);
+    }
+  }, 100);
+
+  function stopTimer() {
+    gameEndedAt = new Date();
   }
 
-  function hideGameScreen() {
-    $('#game-screen').hide();
+  function startTimer() {
+    gameStartedAt = new Date();
+    gameEndedAt = null;
   }
 
-  function showGameScreen() {
-    $('#game-screen').show();
+  function calculateGameTime() {
+    return gameEndedAt.valueOf() - gameStartedAt.valueOf();
   }
 
   // --- INITIALIZATION--- //
