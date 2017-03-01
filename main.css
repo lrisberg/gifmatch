@@ -24,8 +24,8 @@ img, .tile {
 }
 
 .tile {
-    background-color: grey;
-    border: 1px solid black;
+    background-color: white;
+    border: 3px solid grey;
     float: left;
 }
 
@@ -77,6 +77,7 @@ input {
   width: 300px;
   font-size: 60px;
   padding-top: 15px;
+  margin-top: 20px;
 }
 
 #play-again-button {
@@ -86,9 +87,8 @@ input {
   padding-top: 15px;
 }
 
-.select-wrapper input.select-dropdown {
+.select-wrapper input.select-dropdown, #custom-search input {
   border-bottom: 1px solid #FDF073;
-  width: 50%;
 }
 
 ul.dropdown-content.select-dropdown li span {
@@ -97,6 +97,10 @@ ul.dropdown-content.select-dropdown li span {
 
 select {
   width: 50%;
+}
+
+.row {
+  margin-bottom: 0px;
 }
 
 /*red: #FB686C

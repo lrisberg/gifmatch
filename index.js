@@ -182,10 +182,19 @@ $(document).ready(function() {
     }
   }
 
+  function showSearch() {
+    $('#custom-search').show();
+  }
+
+  function hideSearch() {
+    $('#custom-search').hide();
+  }
+
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
   hideTimer();
+  hideSearch();
 
   // ---EVENTS--- //
 
@@ -268,4 +277,10 @@ $(document).ready(function() {
     getGifs(shuffleAndRenderGifs);
     startTimer();
   })
+
+  $('#user-select').change(function(event) {
+    if ($('#user-select').val() === 'custom') {
+      showSearch();
+    }
+  });
 })
