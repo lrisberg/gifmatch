@@ -1,6 +1,5 @@
 * {
   font-family: 'Luckiest Guy', cursive;
-  background-color: black;
 }
 
 h1 {
@@ -18,7 +17,7 @@ img {
     user-select: none;
 }
 
-img, .tile {
+img {
   height: 150px;
   width: 170px;
 }
@@ -27,6 +26,8 @@ img, .tile {
     background-color: white;
     border: 3px solid grey;
     float: left;
+    height: 156px;
+    width: 176px;
 }
 
 .tile-row {
@@ -42,7 +43,7 @@ img, .tile {
 }
 
 .matched {
-    background-color: black;
+    background-color: #263238;
 }
 
 .welcome {
@@ -55,7 +56,7 @@ img, .tile {
 
 .btn {
   background-color: #3DFC9F;
-  color: black;
+  color: #263238;
 }
 
 input {
