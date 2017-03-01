@@ -196,6 +196,7 @@ $(document).ready(function() {
 
   // ---EVENTS--- //
 
+  // click on tile, handle events/state
   $('#gameboard').click(function(event) {
     if (canClick === false) {
       return;
@@ -252,10 +253,16 @@ $(document).ready(function() {
   $('#play-button').click(function(event) {
     event.preventDefault();
     if ($('#user-select option:selected').val() === 'random') {
-      currentTopic = '';
+      currentTopic = 'random';
+      console.log(currentTopic);
+    }
+    else if ($('#user-select option:selected').val() === 'custom') {
+      currentTopic = $('#search').val();
+      console.log(currentTopic);
     }
     else {
       currentTopic = $('#user-select option:selected').val();
+      console.log(currentTopic);
     }
     difficulty = $('#difficulty option:selected').val()
 
