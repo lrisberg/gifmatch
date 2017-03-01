@@ -253,7 +253,7 @@ $(document).ready(function() {
   $('#play-button').click(function(event) {
     event.preventDefault();
     if ($('#user-select option:selected').val() === 'random') {
-      currentTopic = 'random';
+      currentTopic = '';
       console.log(currentTopic);
     }
     else if ($('#user-select option:selected').val() === 'custom') {
