@@ -1,18 +1,11 @@
 * {
   font-family: 'Luckiest Guy', cursive;
-  background-color: #ECE6CE;
-}
-
-#ECE6CE
-#546e7a
-
-body {
-  background-color: #ECE6CE;
 }
 
 h1 {
   font-size: 175px;
   color: #FE7E00;
+  text-shadow: -2px 0 #263238, 0 2px #263238, 2px 0 #263238, 0 -2px #263238;
 }
 
 #2D2E2E
@@ -37,7 +30,7 @@ img {
 }
 
 .tile {
-    background-color: #546e7a;
+    background-color: #bcaaa4;
     border: 3px solid #263238;
     height: 156px;
     width: 176px;
@@ -59,7 +52,7 @@ img {
 }
 
 .matched {
-    background-color: #ECE6CE;
+    background-color: #efebe9;
 }
 
 .welcome {
