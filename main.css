@@ -6,6 +6,7 @@ h1 {
   font-size: 175px;
   color: #FE7E00;
   text-shadow: -3px 0 #263238, 0 3px #263238, 3px 0 #263238, 0 -3px #263238;
+  letter-spacing: 8px;
 }
 
 #2D2E2E
@@ -45,6 +46,11 @@ img {
 
 table {
   font-size: 30px;
+  margin-top: 20px;
+}
+
+td {
+  font-size: 20px;
 }
 
 .hidden {
@@ -102,11 +108,13 @@ input {
   margin-top: 20px;
 }
 
-#play-again-button {
+#play-again-button, #home-button {
   height: 70px;
   width: 250px;
   font-size: 35px;
   padding-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #you-won {

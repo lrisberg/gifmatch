@@ -23,6 +23,16 @@ $(document).ready(function() {
 
   // ---FUNCTIONS--- //
 
+  function resetState() {
+    let currentGifElem = null;
+    let currentTopic = '';
+    let canClick = true;
+    let difficulty = null;
+
+    let gameStartedAt = null;
+    let gameEndedAt = null;
+  }
+
   function calculateGameTime() {
     return gameEndedAt.valueOf() - gameStartedAt.valueOf();
   }
@@ -47,6 +57,10 @@ $(document).ready(function() {
     $('#welcome-screen').hide();
   }
 
+  function showWelcomeScreen() {
+    $('#welcome-screen').show();
+  }
+
   function showPlayAgain() {
     let time = (calculateGameTime() / 1000).toFixed(2);
     $('#you-won').text(`You won in ${time} seconds`);
@@ -64,10 +78,10 @@ $(document).ready(function() {
       let tr = $('<tr>');
       let tdRank = $('<td>').text(i + 1);
       tr.append(tdRank);
-      let tdTime = $('<td>').text((scores[i] / 1000).toFixed(2));
+      let tdTime = $('<td>').text(`${(scores[i] / 1000).toFixed(2)} seconds`);
       tr.append(tdTime);
-      let tdDiff = $('<td>').text(difficulty);
-      tr.append(tdDiff);
+      let tdName = $('<td>');
+      tr.append(tdName);
       $('tbody').append(tr);
     }
   }
@@ -145,6 +159,10 @@ $(document).ready(function() {
   function resetGrid() {
     $('.tile').removeClass('matched').removeClass('hidden').removeClass('shown').addClass('unfilled');
     $('img').remove();
+  }
+
+  function deleteGrid() {
+    $('#gameboard').empty();
   }
 
   function getGifs(onSuccess) {
@@ -299,11 +317,26 @@ $(document).ready(function() {
   $('#play-again-button').click(function(event) {
     event.preventDefault();
 
+
     hidePlayAgain();
     showTimer();
     resetGrid();
+    resetState();
     getGifs(shuffleAndRenderGifs);
     startTimer();
+  })
+
+  // home button
+  $('#home-button').click(function(event) {
+    event.preventDefault();
+    console.log('You clicked the home button');
+
+    resetState();
+    hidePlayAgain();
+    hideTimer();
+    deleteGrid();
+    hideGameScreen();
+    showWelcomeScreen();
   })
 
   $('#user-select').change(function(event) {
