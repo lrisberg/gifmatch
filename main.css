@@ -68,6 +68,10 @@ img {
   color: #263238;
 }
 
+.btn:hover, btn-large:hover {
+  background-color: #ffa954;
+}
+
 input {
   color: #2D2E2E;
 }
