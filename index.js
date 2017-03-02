@@ -19,7 +19,13 @@ $(document).ready(function() {
   let gameStartedAt = null;
   let gameEndedAt = null;
 
+  let scores = [];
+
   // ---FUNCTIONS--- //
+
+  function calculateGameTime() {
+    return gameEndedAt.valueOf() - gameStartedAt.valueOf();
+  }
 
   function showSearch() {
     $('#custom-search').show();
@@ -42,9 +48,26 @@ $(document).ready(function() {
   }
 
   function showPlayAgain() {
-    let time = $('#timer').text();
+    let time = (calculateGameTime() / 1000).toFixed(2);
     $('#you-won').text(`You won in ${time} seconds`);
     $('.play-again').show();
+  }
+
+  function addScore(score) {
+    scores.push(score);
+    scores.sort();
+  }
+
+  function updateScoreBoard() {
+    $('tbody').empty();
+    for (let i = 0; i < scores.length; i++) {
+      let tr = $('<tr>');
+      let td = $('<td>').text(i + 1);
+      tr.append(td);
+      let td2 = $('<td>').text((scores[i] / 1000).toFixed(2));
+      tr.append(td2);
+      $('tbody').append(tr);
+    }
   }
 
   function hidePlayAgain() {
@@ -184,10 +207,6 @@ $(document).ready(function() {
     gameEndedAt = null;
   }
 
-  function calculateGameTime() {
-    return gameEndedAt.valueOf() - gameStartedAt.valueOf();
-  }
-
   // --- INITIALIZATION--- //
 
   hidePlayAgain();
@@ -220,8 +239,10 @@ $(document).ready(function() {
           console.log('You won!');
           showImages([$('img')]);
           hideTimer();
-          showPlayAgain();
           stopTimer();
+          showPlayAgain();
+          addScore(calculateGameTime());
+          updateScoreBoard();
           console.log(calculateGameTime());
         }
         else {
