@@ -62,10 +62,12 @@ $(document).ready(function() {
     $('tbody').empty();
     for (let i = 0; i < scores.length; i++) {
       let tr = $('<tr>');
-      let td = $('<td>').text(i + 1);
-      tr.append(td);
-      let td2 = $('<td>').text((scores[i] / 1000).toFixed(2));
-      tr.append(td2);
+      let tdRank = $('<td>').text(i + 1);
+      tr.append(tdRank);
+      let tdTime = $('<td>').text((scores[i] / 1000).toFixed(2));
+      tr.append(tdTime);
+      let tdDiff = $('<td>').text(difficulty);
+      tr.append(tdDiff);
       $('tbody').append(tr);
     }
   }
