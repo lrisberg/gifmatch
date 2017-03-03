@@ -24,13 +24,13 @@ $(document).ready(function() {
   // ---FUNCTIONS--- //
 
   function resetState() {
-    let currentGifElem = null;
-    let currentTopic = '';
-    let canClick = true;
-    let difficulty = null;
+    currentGifElem = null;
+    currentTopic = '';
+    canClick = true;
+    difficulty = null;
 
-    let gameStartedAt = null;
-    let gameEndedAt = null;
+    gameStartedAt = null;
+    gameEndedAt = null;
   }
 
   function calculateGameTime() {
@@ -171,7 +171,7 @@ $(document).ready(function() {
       method: 'GET',
       url: `https://api.tenor.co/v1/search?tag=${currentTopic}&limit=50`,
       dataType: 'json',
-      success: function(data) {
+      success: (data) => {
         let gifUrls = [];
         for (let gif of data.results) {
           gifUrls.push(gif.media[0].gif.url);
@@ -194,7 +194,7 @@ $(document).ready(function() {
   function updateGridSize() {
     if (difficulty === "easy") {
       rows = 2;
-      columns = 2;
+      columns = 3;
     }
     else if (difficulty === "medium") {
       rows = 3;
@@ -252,7 +252,7 @@ $(document).ready(function() {
         showImages([imgElem]);
       }
       else if (currentGifElem[0] === imgElem[0]) {
-        return;
+        // can't match image to itself, therefore exit
       }
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
