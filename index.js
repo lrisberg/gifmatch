@@ -69,7 +69,8 @@ $(document).ready(function() {
 
   function addScore(score) {
     scores.push(score);
-    scores.sort();
+    scores.sort((score1, score2) => score1 - score2);
+    console.log(scores);
   }
 
   function updateScoreBoard() {
