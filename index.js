@@ -251,6 +251,9 @@ $(document).ready(function() {
         currentGifElem = imgElem;
         showImages([imgElem]);
       }
+      else if (currentGifElem[0] === imgElem[0]) {
+        return;
+      }
       else if (currentGifElem.attr('src') === imgUrl) {
         console.log('Its a match!');
         showImages([imgElem]);
