@@ -168,7 +168,7 @@ $(document).ready(function() {
   function getGifs(onSuccess) {
     $.ajax({
       method: 'GET',
-      url: `https://api.tenor.co/v1/search?tag=${currentTopic}&limit=50`,
+      url: `https://api.tenor.co/v1/search?tag=${currentTopic}&limit=50&safesearch=moderate`,
       dataType: 'json',
       success: (data) => {
         let gifUrls = [];
