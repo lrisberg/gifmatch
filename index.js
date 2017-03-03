@@ -25,7 +25,6 @@ $(document).ready(function() {
 
   function resetState() {
     currentGifElem = null;
-    currentTopic = '';
     canClick = true;
     difficulty = null;
 
