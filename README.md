@@ -1,9 +1,8 @@
 # gifmatch
-To play this game, go here: gifmatch.com
-
-A game of matching GIFs.
 
 Gifmatch is a pairs-matching game with a twist: match animated gifs, not just static images.
+
+To play this game, go here: [Gifmatch](http://gifmatch.com)
 
 I've liked playing video games since I was a kid, so I wanted to make my own game. Gifmatch is a memory matching game. The objective is to match all the pairs of Gifs on the grid in as short a time as possible.
 
