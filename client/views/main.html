@@ -11,3 +11,13 @@
     </div>
   </div>
 </nav>
+
+<div class="container">
+  <div ng-repeat="row in vm.images track by $index" class="row">
+    <div ng-repeat="img in row track by $index" class="col-xs-6 col-md-3">
+      <a href="#" class="thumbnail">
+        <img src="{{img}}">
+      </a>
+    </div>
+  </div>
+</div>
