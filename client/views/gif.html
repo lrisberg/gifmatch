@@ -1,6 +1,6 @@
 <div class="col-xs-6 col-md-3">
   <a href="#" class="thumbnail">
-    <img ng-if="vm.isVisible" ng-click="vm.toggleGif()" src="{{vm.img}}">
-    <div ng-if="!vm.isVisible" class="hiddenImage" ng-click="vm.toggleGif()"></div>
+    <img ng-if="vm.gif.visible" ng-click="vm.toggleGif()" src="{{vm.gif.url}}">
+    <div ng-if="!vm.gif.visible" class="hiddenImage" ng-click="vm.toggleGif()"></div>
   </a>
 </div>

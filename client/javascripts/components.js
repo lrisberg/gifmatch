@@ -11,7 +11,8 @@
 
     .component('gmGif', {
       bindings: {
-        img: '<'
+        gif: '<',
+        gmClick: '&'
       },
       controller: 'GifController',
       controllerAs: 'vm',

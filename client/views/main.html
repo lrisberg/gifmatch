@@ -14,6 +14,8 @@
 
 <div class="container">
   <div ng-repeat="row in vm.images track by $index" class="row">
-    <gm-gif img="img" ng-repeat="img in row track by $index"></gm-gif>
+    <div>
+      <gm-gif gif="gif" gm-click="vm.selectGif(gif)" ng-repeat="gif in row track by $index"></gm-gif>
+    </div>
   </div>
 </div>
