@@ -43,7 +43,8 @@
       for (let url of urls) {
         let gif = {
           url: url,
-          visible: false
+          visible: false,
+          matched: false
         }
         gifs.push(gif)
       }
@@ -71,12 +72,18 @@
           vm.lastSelected = gif;
         }
         else {
-          if (vm.lastSelected === gif) {
-            console.log('a match!');
+          if (vm.lastSelected.url === gif.url) {
+            console.log('a match');
+            gif.visible = false;
+            vm.lastSelected.visible = false;
+            gif.matched = true;
+            vm.lastSelected.matched = true;
             vm.lastSelected = null;
           }
           else {
             console.log('not a match');
+            gif.visible = false;
+            vm.lastSelected.visible = false;
             vm.lastSelected = null;
           }
         }

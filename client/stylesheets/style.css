@@ -5,3 +5,8 @@
 .hiddenImage {
   height: 150px;
 }
+
+.matchedImage {
+  height: 150px;
+  background-color: red;
+}
