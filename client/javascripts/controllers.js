@@ -52,6 +52,15 @@
 
     function GifController() {
       let vm = this;
+
+      // from binding
+      // vm.img
+
+      vm.isVisible = false;
+
+      vm.toggleGif = function() {
+        vm.isVisible = !vm.isVisible;
+      }
     }
 
 })();

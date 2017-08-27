@@ -1,3 +1,7 @@
 .thumbnail img {
   height: 150px;
 }
+
+.hiddenImage {
+  height: 150px;
+}
