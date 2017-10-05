@@ -1,18 +1,23 @@
 {
   "name": "gifmatch",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "start": "node server/bin/www",
-    "start:dev": "nodemon server/bin/www"
+  "devDependencies": {
+    "enzyme": "^2.8.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-scripts": "^1.0.2"
   },
   "dependencies": {
-    "body-parser": "~1.16.0",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.0",
-    "express": "~4.14.1",
-    "hbs": "^4.0.1",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "prop-types": "^15.5.10",
+    "react": "^15.5.0",
+    "react-dom": "^15.5.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.5.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test"
   }
 }
