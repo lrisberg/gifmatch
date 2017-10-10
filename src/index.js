@@ -1,15 +1,57 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import App from './components/App'
-import reducer from './reducers'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 
-const store = createStore(reducer)
+class Tile extends React.Component {
+  render() {
+    return (
+      <button className="tile">
+      </button>
+    );
+  }
+}
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+class Board extends React.Component {
+  renderTile() {
+    return <Tile />;
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="board-row">
+          {this.renderTile()}
+          {this.renderTile()}
+          {this.renderTile()}
+        </div>
+        <div className="board-row">
+          {this.renderTile()}
+          {this.renderTile()}
+          {this.renderTile()}
+        </div>
+        <div className="board-row">
+          {this.renderTile()}
+          {this.renderTile()}
+          {this.renderTile()}
+        </div>
+      </div>
+    );
+  }
+}
+
+class Game extends React.Component {
+  render() {
+    return (
+      <div className="game">
+        <div className="game-board">
+          <Board />
+        </div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Game />,
   document.getElementById('root')
-)
+);
