@@ -12,27 +12,45 @@ class Tile extends React.Component {
 }
 
 class Board extends React.Component {
-  renderTile() {
-    return <Tile />;
+  constructor(props) {
+    super(props);
+    this.state = {
+      height: 5,
+      length: 4
+    }
+  }
+
+  renderTile(row, column) {
+    const key = `${row}, ${column}`
+    return <Tile key={key} />;
+  }
+
+  renderRow(row, tiles) {
+    return (
+      <div key={row} className="board-row">
+        {tiles}
+      </div>
+    )
+  }
+
+  renderGrid(length, height) {
+    let rows = [];
+    for (let i = 0; i < height; i++) {
+      let tiles = [];
+      for (let j = 0; j < length; j++) {
+        tiles.push(this.renderTile(i, j));
+      }
+      const row = this.renderRow(i, tiles);
+      rows.push(row);
+    }
+    return rows;
   }
 
   render() {
     return (
       <div>
         <div className="board-row">
-          {this.renderTile()}
-          {this.renderTile()}
-          {this.renderTile()}
-        </div>
-        <div className="board-row">
-          {this.renderTile()}
-          {this.renderTile()}
-          {this.renderTile()}
-        </div>
-        <div className="board-row">
-          {this.renderTile()}
-          {this.renderTile()}
-          {this.renderTile()}
+          {this.renderGrid(this.state.length, this.state.height)}
         </div>
       </div>
     );
