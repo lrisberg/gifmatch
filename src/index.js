@@ -85,8 +85,8 @@ class Game extends React.Component {
         [
           'https://media.giphy.com/media/l3q2yYNt8DXoyKRdm/giphy.gif',
           'https://media.giphy.com/media/l3q2y9WQRuooRmyfS/giphy.gif',
-          'https://media.giphy.com/media/l3q2tvaYp4KseN22A/giphy.gif',
-          'https://media.giphy.com/media/l3q2tvaYp4KseN22A/giphy.gif'
+          'https://media.giphy.com/media/l3q2Fa0XM2SEciHaU/giphy.gif',
+          'https://media.giphy.com/media/l3q2Fa0XM2SEciHaU/giphy.gif'
         ],
         [
           'https://media.giphy.com/media/l3q2L3yM5UhxEnsvC/giphy.gif',
@@ -95,10 +95,10 @@ class Game extends React.Component {
           'https://media.giphy.com/media/26xBy4g1eHS1vqZRS/giphy.gif'
         ],
         [
-          'https://media.giphy.com/media/3o6ZsYZtTSdFOdxPEY/giphy.gif',
-          'https://media.giphy.com/media/3o6ZsYZtTSdFOdxPEY/giphy.gif',
-          'https://media.giphy.com/media/3o6ZsYZtTSdFOdxPEY/giphy.gif',
-          'https://media.giphy.com/media/3o6ZsYZtTSdFOdxPEY/giphy.gif'
+          'https://media.giphy.com/media/l3q2L3yM5UhxEnsvC/giphy.gif',
+          'https://media.giphy.com/media/l3q2yYNt8DXoyKRdm/giphy.gif',
+          'https://media.giphy.com/media/l3q2y9WQRuooRmyfS/giphy.gif',
+          'https://media.giphy.com/media/3oz8xDzuVDbKoU4shi/giphy.gif'
         ]
       ]
     }
