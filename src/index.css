@@ -1,9 +1,13 @@
 .tile {
-    background-color: #bcaaa4;
+    /*background-color: #bcaaa4;*/
     border: 3px solid #263238;
     height: 156px;
     width: 176px;
     display: inline-block;
+}
+
+.hidden-tile {
+  background-color: #F5F4E2;
 }
 
 .board-row {
