@@ -3,18 +3,45 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Tile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    }
+  }
+
+  toggleTile() {
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+
   render() {
+    let contents;
+    if (this.state.visible) {
+      contents = (
+        <img onClick={() => this.toggleTile()} src={this.props.gif} alt="a fruit" className="hidden-tile">
+        </img>
+      )
+    }
+    else {
+      contents = (
+        <div onClick={() => this.toggleTile()} src={this.props.gif} alt="a fruit" className="hidden-tile">
+        </div>
+      )
+    }
+
     return (
-      <img src={this.props.gif} className="tile">
-      </img>
+      contents
     );
   }
 }
 
 class Board extends React.Component {
+
   renderTile(row, column, gif) {
     let key = `${row}, ${column}`;
-    return <Tile gif={gif} key={key} />;
+    return <Tile visible={false} gif={gif} key={key} />;
   }
 
   renderRow(row, tiles) {

@@ -8,6 +8,10 @@
 
 .hidden-tile {
   background-color: #F5F4E2;
+  border: 3px solid #263238;
+  height: 156px;
+  width: 176px;
+  display: inline-block;
 }
 
 .board-row {
@@ -15,3 +19,6 @@
     height: 156px;
     white-space: nowrap;
 }
+
+
+/*beige background-gif color: #273338*/
