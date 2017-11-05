@@ -35,6 +35,7 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      misses: 0,
       currentGif: null,
       waiting: false,
       tileVisibility: {
@@ -64,7 +65,8 @@ class Board extends React.Component {
         console.log('not a match');
         const currentKey = this.state.currentKey;
         this.setState({
-          waiting: true
+          waiting: true,
+          misses: this.state.misses + 1
         })
         setTimeout(() => {
           visibility[key] = false;
@@ -110,12 +112,21 @@ class Board extends React.Component {
     return rows;
   }
 
+  renderMissCounter() {
+    return (
+      <div className="miss-counter">
+        Misses: {this.state.misses}
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
-        <div className="board-row">
+        <div>
           {this.renderGrid(this.props.gifs)}
         </div>
+        {this.renderMissCounter()}
       </div>
     );
   }
