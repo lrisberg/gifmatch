@@ -3,22 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Tile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false
-    }
-  }
-
   toggleTile() {
-    this.setState({
-      visible: !this.state.visible
-    })
+    if (!this.props.visible) {
+      this.props.selectGif(this.props.gif);
+    }
   }
 
   render() {
     let contents;
-    if (this.state.visible) {
+    if (this.props.visible) {
       contents = (
         <img onClick={() => this.toggleTile()} src={this.props.gif} alt="a fruit" className="hidden-tile">
         </img>
@@ -38,10 +31,53 @@ class Tile extends React.Component {
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentGif: null,
+      tileVisibility: {
+      }
+    }
+  }
+
+  onSelectGif(gif, key) {
+    const visibility = this.state.tileVisibility;
+    visibility[key] = true;
+    this.setState({tileVisibility: visibility});
+
+    if (this.state.currentGif === null) {
+      this.setState({
+        currentGif: gif,
+        currentKey: key
+      })
+    }
+    else {
+      if (gif === this.state.currentGif) {
+        console.log('match!')
+      }
+      else {
+        console.log('not a match');
+        const currentKey = this.state.currentKey;
+        setTimeout(() => {
+          visibility[key] = false;
+          visibility[currentKey] = false;
+          this.setState({
+            tileVisibility: visibility
+          })
+        }, 500)
+      }
+      this.setState({
+        currentGif: null,
+        currentKey: null
+      })
+    }
+  }
 
   renderTile(row, column, gif) {
     let key = `${row}, ${column}`;
-    return <Tile visible={false} gif={gif} key={key} />;
+    const visible = this.state.tileVisibility[key] || false;
+
+    return <Tile selectGif={(gif) => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
   }
 
   renderRow(row, tiles) {
