@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import Board from './board.jsx';
 
 class Game extends React.Component {

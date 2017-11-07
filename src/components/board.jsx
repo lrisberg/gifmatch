@@ -2,7 +2,10 @@ import React from 'react';
 import Tile from './tile';
 
 import {
-  addMiss
+  addMiss,
+  setCurrentGif,
+  setWaiting,
+  setCurrentKey
 } from '../actions/actions.js';
 
 class Board extends React.Component {
@@ -22,34 +25,27 @@ class Board extends React.Component {
       return;
     }
 
-    //shows the Gif (whether match or not)
     const visibility = { ...this.props.state.tileVisibility, [key]: true };
     this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
 
-    //if no currentGif, sets currentGif/Key
     if (this.props.state.currentGif === null) {
-      this.props.store.dispatch({ type: 'SET_CURRENT_KEY', key });
-      this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif });
+      this.props.store.dispatch(setCurrentKey(key));
+      this.props.store.dispatch(setCurrentGif(gif));
     }
-
-    //if there already is a currentGif
     else {
-      //if it's not a match
       if (gif !== this.props.state.currentGif) {
         const currentKey = this.props.state.currentKey;
         this.props.store.dispatch(addMiss());
-        // this.props.store.dispatch({ type: 'ADD_MISS' });
-        this.props.store.dispatch({ type: 'SET_WAITING', waiting: true })
+        this.props.store.dispatch(setWaiting(true));
         setTimeout(() => {
           visibility[key] = false;
           visibility[currentKey] = false;
-          this.props.store.dispatch({ type: 'SET_WAITING', waiting: false })
+          this.props.store.dispatch(setWaiting(false));
           this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
         }, 500)
       }
-      //whether it's a match or not - reset currentKey/Gif
-      this.props.store.dispatch({ type: 'SET_CURRENT_KEY', key: null });
-      this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif: null });
+      this.props.store.dispatch(setCurrentKey(null));
+      this.props.store.dispatch(setCurrentGif(null));
     }
   }
 

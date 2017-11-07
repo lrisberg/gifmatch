@@ -14,9 +14,23 @@ export function addMiss() {
   }
 }
 
-// export function setCurrentGif(gif) {
-//   return {
-//     type: SET_CURRENT_GIF,
-//     currentGif:
-//   }
-// }
+export function setCurrentGif(gif) {
+  return {
+    type: SET_CURRENT_GIF,
+    gif
+  }
+}
+
+export function setWaiting(bool) {
+  return {
+    type: SET_WAITING,
+    waiting: bool
+  }
+}
+
+export function setCurrentKey(key) {
+  return {
+    type: SET_CURRENT_KEY,
+    key
+  }
+}

@@ -56,7 +56,6 @@ function initialState() {
 }
 
 export default (state = initialState(), action) => {
-  const newState = {};
   switch (action.type) {
     case SET_CURRENT_GIF:
       return { ...state, currentGif: action.gif };
