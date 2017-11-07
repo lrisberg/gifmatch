@@ -43,7 +43,10 @@ function initialState() {
     gifs: initialGifs(),
     currentGif: null,
     waiting: false,
-    currentKey: null
+    currentKey: null,
+    tileVisibility: {
+
+    }
   };
 }
 
@@ -58,6 +61,8 @@ export default (state = initialState(), action) => {
       return { ...state, waiting: action.waiting };
     case 'ADD_MISS':
       return { ...state, misses: state.misses + 1 };
+    case 'SET_TILE_VISIBILITY':
+      return { ...state, tileVisibility: action.visibility };
     default:
       return state
   };

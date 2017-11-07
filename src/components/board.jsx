@@ -2,22 +2,14 @@ import React from 'react';
 import Tile from './tile';
 
 class Board extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tileVisibility: {
-      }
-    }
-  }
-
   onSelectGif(gif, key) {
     if (this.props.state.waiting) {
       return;
     }
 
     //shows the Gif (whether match or not)
-    const visibility = { ...this.state.tileVisibility, [key]: true };
-    this.setState({tileVisibility: visibility});
+    const visibility = { ...this.props.state.tileVisibility, [key]: true };
+    this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
 
     //if no currentGif, sets currentGif/Key
     if (this.props.state.currentGif === null) {
@@ -37,9 +29,7 @@ class Board extends React.Component {
           visibility[key] = false;
           visibility[currentKey] = false;
           this.props.store.dispatch({ type: 'SET_WAITING', waiting: false })
-          this.setState({
-            tileVisibility: visibility
-          })
+          this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
         }, 500)
       }
       //whether it's a match or not - reset currentKey/Gif
@@ -50,7 +40,7 @@ class Board extends React.Component {
 
   renderTile(row, column, gif) {
     const key = `${row}, ${column}`;
-    const visible = this.state.tileVisibility[key] || false;
+    const visible = this.props.state.tileVisibility[key] || false;
 
     return <Tile selectGif={() => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
   }
