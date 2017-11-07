@@ -19,3 +19,21 @@ const render = () => ReactDOM.render(
 
 render();
 store.subscribe(render);
+
+
+// container
+
+
+// function mapStateToProps(state, ownProps) {
+//   return {
+//     selected: state.tiles[ownProps.x][ownProps.y].selected
+//   };
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     toggleTile: () => dispatch({ type: "UPDATE_TILE", payload: { ownProps.x, ownProps.y }})
+//   }
+// }
+//
+// connect(mapStateToProps, mapDispatchToProps)(Tile)

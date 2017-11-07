@@ -31,10 +31,9 @@ function initialGifs() {
     'https://media.giphy.com/media/l3q2L3yM5UhxEnsvC/giphy.gif',
     'https://media.giphy.com/media/3oz8xDzuVDbKoU4shi/giphy.gif'
   ];
-  let sourceGifsDoubled = _.concat(sourceGifs, sourceGifs)
-  let shuffledGifs = _.shuffle(sourceGifsDoubled);
+  let doubledGifs = _.concat(sourceGifs, sourceGifs)
+  let shuffledGifs = _.shuffle(doubledGifs);
   let groupedGifs = _.chunk(shuffledGifs, 4);
-
   return groupedGifs;
 }
 
@@ -43,7 +42,8 @@ function initialState() {
     misses: 0,
     gifs: initialGifs(),
     currentGif: null,
-    waiting: false
+    waiting: false,
+    currentKey: null
   };
 }
 
@@ -51,14 +51,13 @@ export default (state = initialState(), action) => {
   const newState = {};
   switch (action.type) {
     case 'SET_CURRENT_GIF':
-      _.assign(newState, state, {currentGif: action.gif});
-      return newState;
+      return { ...state, currentGif: action.gif };
+    case 'SET_CURRENT_KEY':
+      return { ...state, currentKey: action.key };
     case 'SET_WAITING':
-      _.assign(newState, state, { waiting: action.waiting });
-      return newState;
+      return { ...state, waiting: action.waiting };
     case 'ADD_MISS':
-      _.assign(newState, state, { misses: state.misses + 1 });
-      return newState;
+      return { ...state, misses: state.misses + 1 };
     default:
       return state
   };

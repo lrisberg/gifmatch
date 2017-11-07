@@ -5,7 +5,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      waiting: false,
       tileVisibility: {
       }
     }
@@ -15,23 +14,23 @@ class Board extends React.Component {
     if (this.props.state.waiting) {
       return;
     }
-    const visibility = this.state.tileVisibility;
-    visibility[key] = true;
+
+    //shows the Gif (whether match or not)
+    const visibility = { ...this.state.tileVisibility, [key]: true };
     this.setState({tileVisibility: visibility});
 
+    //if no currentGif, sets currentGif/Key
     if (this.props.state.currentGif === null) {
-      this.setState({
-        currentKey: key
-      })
+      this.props.store.dispatch({ type: 'SET_CURRENT_KEY', key });
       this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif });
     }
+
+    //if there already is a currentGif
     else {
-      if (gif === this.props.state.currentGif) {
-        console.log('match!')
-      }
-      else {
-        console.log('not a match');
-        const currentKey = this.state.currentKey;
+      //if it's not a match
+      if (gif !== this.props.state.currentGif) {
+        const currentKey = this.props.state.currentKey;
+        // this.props.store.dispatch(addMiss());
         this.props.store.dispatch({ type: 'ADD_MISS' });
         this.props.store.dispatch({ type: 'SET_WAITING', waiting: true })
         setTimeout(() => {
@@ -43,18 +42,17 @@ class Board extends React.Component {
           })
         }, 500)
       }
-      this.setState({
-        currentKey: null
-      })
+      //whether it's a match or not - reset currentKey/Gif
+      this.props.store.dispatch({ type: 'SET_CURRENT_KEY', key: null });
       this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif: null });
     }
   }
 
   renderTile(row, column, gif) {
-    let key = `${row}, ${column}`;
+    const key = `${row}, ${column}`;
     const visible = this.state.tileVisibility[key] || false;
 
-    return <Tile selectGif={(gif) => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
+    return <Tile selectGif={() => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
   }
 
   renderRow(row, tiles) {
@@ -66,16 +64,12 @@ class Board extends React.Component {
   }
 
   renderGrid(gifs) {
-    let rows = [];
-    for (let i = 0; i < gifs.length; i++) {
-      let tiles = [];
-      for (let j = 0; j < gifs[i].length; j++) {
-        tiles.push(this.renderTile(i, j, gifs[i][j]))
-      }
-      const row = this.renderRow(i, tiles);
-      rows.push(row);
-    }
-    return rows;
+    return gifs.map((row, i) => {
+      const tiles = gifs[i].map((tile, j) => {
+        return this.renderTile(i, j, tile)
+      })
+      return this.renderRow(i, tiles)
+    })
   }
 
   renderMissCounter() {
