@@ -1,11 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { createStore } from 'redux';
 import './index.css';
 
 import Game from './components/game';
+import game from './reducers/game';
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
+const store = createStore(game);
+const rootEl = document.getElementById('root');
+
+const render = () => ReactDOM.render(
+  <Game
+    state={store.getState()}
+    store={store}
+  />,
+  rootEl
 );
+
+render();
+store.subscribe(render);

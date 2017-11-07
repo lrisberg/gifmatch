@@ -5,8 +5,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      misses: 0,
-      currentGif: null,
       waiting: false,
       tileVisibility: {
       }
@@ -14,43 +12,41 @@ class Board extends React.Component {
   }
 
   onSelectGif(gif, key) {
-    if (this.state.waiting) {
+    if (this.props.state.waiting) {
       return;
     }
     const visibility = this.state.tileVisibility;
     visibility[key] = true;
     this.setState({tileVisibility: visibility});
 
-    if (this.state.currentGif === null) {
+    if (this.props.state.currentGif === null) {
       this.setState({
-        currentGif: gif,
         currentKey: key
       })
+      this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif });
     }
     else {
-      if (gif === this.state.currentGif) {
+      if (gif === this.props.state.currentGif) {
         console.log('match!')
       }
       else {
         console.log('not a match');
         const currentKey = this.state.currentKey;
-        this.setState({
-          waiting: true,
-          misses: this.state.misses + 1
-        })
+        this.props.store.dispatch({ type: 'ADD_MISS' });
+        this.props.store.dispatch({ type: 'SET_WAITING', waiting: true })
         setTimeout(() => {
           visibility[key] = false;
           visibility[currentKey] = false;
+          this.props.store.dispatch({ type: 'SET_WAITING', waiting: false })
           this.setState({
-            tileVisibility: visibility,
-            waiting: false
+            tileVisibility: visibility
           })
         }, 500)
       }
       this.setState({
-        currentGif: null,
         currentKey: null
       })
+      this.props.store.dispatch({ type: 'SET_CURRENT_GIF', gif: null });
     }
   }
 
@@ -85,7 +81,7 @@ class Board extends React.Component {
   renderMissCounter() {
     return (
       <div className="miss-counter">
-        Misses: {this.state.misses}
+        Misses: {this.props.state.misses}
       </div>
     )
   }
@@ -94,7 +90,7 @@ class Board extends React.Component {
     return (
       <div>
         <div>
-          {this.renderGrid(this.props.gifs)}
+          {this.renderGrid(this.props.state.gifs)}
         </div>
         {this.renderMissCounter()}
       </div>
