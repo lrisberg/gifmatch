@@ -21,16 +21,23 @@ export function setCurrentGif(gif) {
   }
 }
 
-export function setWaiting(bool) {
-  return {
-    type: SET_WAITING,
-    waiting: bool
-  }
-}
-
 export function setCurrentKey(key) {
   return {
     type: SET_CURRENT_KEY,
     key
+  }
+}
+
+export function setTileVisibility(visibility) {
+  return {
+    type: SET_TILE_VISIBILITY,
+    visibility
+  }
+}
+
+export function setWaiting(bool) {
+  return {
+    type: SET_WAITING,
+    waiting: bool
   }
 }

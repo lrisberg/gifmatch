@@ -4,8 +4,9 @@ import Tile from './tile';
 import {
   addMiss,
   setCurrentGif,
-  setWaiting,
-  setCurrentKey
+  setCurrentKey,
+  setTileVisibility,
+  setWaiting
 } from '../actions/actions.js';
 
 class Board extends React.Component {
@@ -26,7 +27,7 @@ class Board extends React.Component {
     }
 
     const visibility = { ...this.props.state.tileVisibility, [key]: true };
-    this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
+    this.props.store.dispatch(setTileVisibility(visibility));
 
     if (this.props.state.currentGif === null) {
       this.props.store.dispatch(setCurrentKey(key));
@@ -41,7 +42,7 @@ class Board extends React.Component {
           visibility[key] = false;
           visibility[currentKey] = false;
           this.props.store.dispatch(setWaiting(false));
-          this.props.store.dispatch({ type: 'SET_TILE_VISIBILITY', visibility });
+          this.props.store.dispatch(setTileVisibility(visibility));
         }, 500)
       }
       this.props.store.dispatch(setCurrentKey(null));
