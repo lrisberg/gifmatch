@@ -1,8 +1,23 @@
 import React from 'react';
 import Tile from './tile';
 
+import {
+  addMiss
+} from '../actions/actions.js';
+
 class Board extends React.Component {
-  onSelectGif(gif, key) {
+  render() {
+    return (
+      <div>
+        <div>
+          {this.renderGrid(this.props.state.gifs)}
+        </div>
+        {this.renderMissCounter()}
+      </div>
+    );
+  }
+
+  onSelectGif = (gif, key) => {
     if (this.props.state.waiting) {
       return;
     }
@@ -22,8 +37,8 @@ class Board extends React.Component {
       //if it's not a match
       if (gif !== this.props.state.currentGif) {
         const currentKey = this.props.state.currentKey;
-        // this.props.store.dispatch(addMiss());
-        this.props.store.dispatch({ type: 'ADD_MISS' });
+        this.props.store.dispatch(addMiss());
+        // this.props.store.dispatch({ type: 'ADD_MISS' });
         this.props.store.dispatch({ type: 'SET_WAITING', waiting: true })
         setTimeout(() => {
           visibility[key] = false;
@@ -38,22 +53,15 @@ class Board extends React.Component {
     }
   }
 
-  renderTile(row, column, gif) {
-    const key = `${row}, ${column}`;
-    const visible = this.props.state.tileVisibility[key] || false;
-
-    return <Tile selectGif={() => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
-  }
-
-  renderRow(row, tiles) {
+  renderMissCounter = () => {
     return (
-      <div key={row} className="board-row">
-        {tiles}
+      <div className="miss-counter">
+        Misses: {this.props.state.misses}
       </div>
     )
   }
 
-  renderGrid(gifs) {
+  renderGrid = (gifs) => {
     return gifs.map((row, i) => {
       const tiles = gifs[i].map((tile, j) => {
         return this.renderTile(i, j, tile)
@@ -62,23 +70,19 @@ class Board extends React.Component {
     })
   }
 
-  renderMissCounter() {
-    return (
-      <div className="miss-counter">
-        Misses: {this.props.state.misses}
-      </div>
-    )
+  renderTile = (row, column, gif) => {
+    const key = `${row}, ${column}`;
+    const visible = this.props.state.tileVisibility[key] || false;
+
+    return <Tile selectGif={() => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
   }
 
-  render() {
+  renderRow = (row, tiles) => {
     return (
-      <div>
-        <div>
-          {this.renderGrid(this.props.state.gifs)}
-        </div>
-        {this.renderMissCounter()}
+      <div key={row} className="board-row">
+        {tiles}
       </div>
-    );
+    )
   }
 }
 

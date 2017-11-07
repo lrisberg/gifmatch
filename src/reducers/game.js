@@ -19,6 +19,13 @@
 // }
 
 import _ from 'lodash';
+import {
+  ADD_MISS,
+  SET_CURRENT_GIF,
+  SET_CURRENT_KEY,
+  SET_WAITING,
+  SET_TILE_VISIBILITY
+} from '../actions/actions.js';
 
 function initialGifs() {
   const sourceGifs = [
@@ -44,24 +51,22 @@ function initialState() {
     currentGif: null,
     waiting: false,
     currentKey: null,
-    tileVisibility: {
-
-    }
+    tileVisibility: {}
   };
 }
 
 export default (state = initialState(), action) => {
   const newState = {};
   switch (action.type) {
-    case 'SET_CURRENT_GIF':
+    case SET_CURRENT_GIF:
       return { ...state, currentGif: action.gif };
-    case 'SET_CURRENT_KEY':
+    case SET_CURRENT_KEY:
       return { ...state, currentKey: action.key };
-    case 'SET_WAITING':
+    case SET_WAITING:
       return { ...state, waiting: action.waiting };
-    case 'ADD_MISS':
+    case ADD_MISS:
       return { ...state, misses: state.misses + 1 };
-    case 'SET_TILE_VISIBILITY':
+    case SET_TILE_VISIBILITY:
       return { ...state, tileVisibility: action.visibility };
     default:
       return state
