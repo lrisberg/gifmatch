@@ -6,7 +6,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board state={this.props.state} store={this.props.store}/>
+          <Board />
         </div>
       </div>
     );

@@ -2,23 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import './index.css';
+import { connect, Provider } from 'react-redux';
 
 import Game from './components/game';
 import game from './reducers/game';
 
+// render();
+// store.subscribe(render);
+
+function mapStateToProps(state, ownProps) {
+  return {
+    state: state
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+const ConnectedGame = connect(mapStateToProps, mapDispatchToProps)(Game);
+
 const store = createStore(game);
 const rootEl = document.getElementById('root');
 
-const render = () => ReactDOM.render(
-  <Game
-    state={store.getState()}
-    store={store}
-  />,
+ReactDOM.render(
+  <Provider store={store}>
+    <ConnectedGame></ConnectedGame>
+  </Provider>,
   rootEl
 );
-
-render();
-store.subscribe(render);
 
 
 // container

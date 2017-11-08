@@ -1,30 +1,7 @@
-// what is the state?
-// state = {
-//   misses: 0,
-//   waiting: false,
-//   gifs: [
-//     {
-//       gif: 'http://...',
-//       visible: false
-//     },
-//     {
-//       gif: 'http://...',
-//       visible: false
-//     },
-//     {
-//       gif: 'http://...',
-//       visible: false
-//     },
-//   ]
-// }
-
 import _ from 'lodash';
 import {
-  ADD_MISS,
-  SET_CURRENT_GIF,
-  SET_CURRENT_KEY,
-  SET_WAITING,
-  SET_TILE_VISIBILITY
+  SELECT_GIF,
+  STOP_WAITING
 } from '../actions/actions.js';
 
 function initialGifs() {
@@ -57,16 +34,62 @@ function initialState() {
 
 export default (state = initialState(), action) => {
   switch (action.type) {
-    case SET_CURRENT_GIF:
-      return { ...state, currentGif: action.gif };
-    case SET_CURRENT_KEY:
-      return { ...state, currentKey: action.key };
-    case SET_WAITING:
-      return { ...state, waiting: action.waiting };
-    case ADD_MISS:
-      return { ...state, misses: state.misses + 1 };
-    case SET_TILE_VISIBILITY:
-      return { ...state, tileVisibility: action.visibility };
+    case SELECT_GIF:
+      if (state.waiting) {
+        return { ...state };
+      }
+
+      const { key, gif, stopWaitingFunc } = action;
+
+      const tileVisibility = { ...state.tileVisibility, [key]: true };
+
+      if (state.currentGif === null) {
+        return {
+          ...state,
+          currentGif: gif,
+          currentKey: key,
+          tileVisibility: tileVisibility
+        }
+      }
+      else {
+        let misses;
+        let waiting;
+        const currentKey = null;
+        const currentGif = null;
+
+        misses = state.misses;
+        waiting = state.waiting;
+        if (gif !== state.currentGif) {
+          misses += 1;
+          waiting = true;
+          const copyCurrentKey = state.currentKey;
+          setTimeout(() => {
+            stopWaitingFunc(key, copyCurrentKey);
+          }, 500);
+        }
+
+        return {
+          ...state,
+          misses: misses,
+          currentGif: currentGif,
+          currentKey: currentKey,
+          waiting: waiting,
+          tileVisibility: tileVisibility
+        };
+      }
+    case STOP_WAITING:
+      const { key1, key2 } = action;
+
+      const tileVisibility2 = {
+        ...state.tileVisibility,
+        [key1]: false,
+        [key2]: false
+      };
+
+      return {
+        ...state,
+        waiting: false,
+        tileVisibility: tileVisibility2 }
     default:
       return state
   };

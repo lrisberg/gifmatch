@@ -1,43 +1,23 @@
 // action types
 
-export const ADD_MISS = 'ADD_MISS';
-export const SET_CURRENT_GIF = 'SET_CURRENT_GIF';
-export const SET_CURRENT_KEY = 'SET_CURRENT_KEY';
-export const SET_WAITING = 'SET_WAITING';
-export const SET_TILE_VISIBILITY = 'SET_TILE_VISIBILITY';
+export const SELECT_GIF = 'SELECT_GIF';
+export const STOP_WAITING = 'STOP_WAITING';
 
 // action creators
 
-export function addMiss() {
+export function selectGif(key, gif, stopWaitingFunc) {
   return {
-    type: ADD_MISS
-  }
+    type: SELECT_GIF,
+    key,
+    gif,
+    stopWaitingFunc
+  };
 }
 
-export function setCurrentGif(gif) {
+export function stopWaiting(key1, key2) {
   return {
-    type: SET_CURRENT_GIF,
-    gif
-  }
-}
-
-export function setCurrentKey(key) {
-  return {
-    type: SET_CURRENT_KEY,
-    key
-  }
-}
-
-export function setTileVisibility(visibility) {
-  return {
-    type: SET_TILE_VISIBILITY,
-    visibility
-  }
-}
-
-export function setWaiting(bool) {
-  return {
-    type: SET_WAITING,
-    waiting: bool
-  }
+    type: STOP_WAITING,
+    key1,
+    key2
+  };
 }

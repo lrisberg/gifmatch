@@ -1,59 +1,24 @@
 import React from 'react';
 import Tile from './tile';
-
-import {
-  addMiss,
-  setCurrentGif,
-  setCurrentKey,
-  setTileVisibility,
-  setWaiting
-} from '../actions/actions.js';
+import { selectGif, stopWaiting } from '../actions/actions.js';
+import { connect } from 'react-redux';
 
 class Board extends React.Component {
   render() {
     return (
       <div>
         <div>
-          {this.renderGrid(this.props.state.gifs)}
+          {this.renderGrid(this.props.gifs)}
         </div>
         {this.renderMissCounter()}
       </div>
     );
   }
 
-  onSelectGif = (gif, key) => {
-    if (this.props.state.waiting) {
-      return;
-    }
-
-    const visibility = { ...this.props.state.tileVisibility, [key]: true };
-    this.props.store.dispatch(setTileVisibility(visibility));
-
-    if (this.props.state.currentGif === null) {
-      this.props.store.dispatch(setCurrentKey(key));
-      this.props.store.dispatch(setCurrentGif(gif));
-    }
-    else {
-      if (gif !== this.props.state.currentGif) {
-        const currentKey = this.props.state.currentKey;
-        this.props.store.dispatch(addMiss());
-        this.props.store.dispatch(setWaiting(true));
-        setTimeout(() => {
-          visibility[key] = false;
-          visibility[currentKey] = false;
-          this.props.store.dispatch(setWaiting(false));
-          this.props.store.dispatch(setTileVisibility(visibility));
-        }, 500)
-      }
-      this.props.store.dispatch(setCurrentKey(null));
-      this.props.store.dispatch(setCurrentGif(null));
-    }
-  }
-
   renderMissCounter = () => {
     return (
       <div className="miss-counter">
-        Misses: {this.props.state.misses}
+        Misses: {this.props.misses}
       </div>
     )
   }
@@ -69,9 +34,9 @@ class Board extends React.Component {
 
   renderTile = (row, column, gif) => {
     const key = `${row}, ${column}`;
-    const visible = this.props.state.tileVisibility[key] || false;
+    const visible = this.props.tileVisibility[key] || false;
 
-    return <Tile selectGif={() => this.onSelectGif(gif, key)} visible={visible} gif={gif} key={key} />;
+    return <Tile selectGif={() => this.props.onSelectGif(key, gif)} visible={visible} gif={gif} key={key} />;
   }
 
   renderRow = (row, tiles) => {
@@ -83,4 +48,27 @@ class Board extends React.Component {
   }
 }
 
-  export default Board;
+function mapStateToProps(state, ownProps) {
+  return {
+    gifs: state.gifs,
+    misses: state.misses,
+    tileVisibility: state.tileVisibility,
+    waiting: state.waiting,
+    currentGif: state.currentGif,
+    currentKey: state.currentKey,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onSelectGif: (key, gif) => {
+      dispatch(selectGif(key, gif, (key1, key2) => {
+        dispatch(stopWaiting(key1, key2));
+      }));
+    }
+  };
+}
+
+const ConnectedBoard = connect(mapStateToProps, mapDispatchToProps)(Board);
+
+export default ConnectedBoard;
