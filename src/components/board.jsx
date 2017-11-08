@@ -36,7 +36,11 @@ class Board extends React.Component {
     const key = `${row}, ${column}`;
     const visible = this.props.tileVisibility[key] || false;
 
-    return <Tile selectGif={() => this.props.onSelectGif(key, gif)} visible={visible} gif={gif} key={key} />;
+    return <Tile
+      selectGif={() => this.props.onSelectGif(key, gif)}
+      visible={visible}
+      gif={gif}
+      key={key} />;
   }
 
   renderRow = (row, tiles) => {

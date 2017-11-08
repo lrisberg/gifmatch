@@ -23,11 +23,11 @@ function initialGifs() {
 
 function initialState() {
   return {
-    misses: 0,
-    gifs: initialGifs(),
     currentGif: null,
-    waiting: false,
     currentKey: null,
+    gifs: initialGifs(),
+    misses: 0,
+    waiting: false,
     tileVisibility: {}
   };
 }
@@ -52,13 +52,12 @@ export default (state = initialState(), action) => {
         }
       }
       else {
-        let misses;
-        let waiting;
         const currentKey = null;
         const currentGif = null;
 
-        misses = state.misses;
-        waiting = state.waiting;
+        let misses = state.misses;
+        let waiting = state.waiting;
+
         if (gif !== state.currentGif) {
           misses += 1;
           waiting = true;

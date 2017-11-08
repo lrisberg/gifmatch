@@ -1,33 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import './index.css';
 import { connect, Provider } from 'react-redux';
 
 import Game from './components/game';
 import game from './reducers/game';
 
-// render();
-// store.subscribe(render);
-
-function mapStateToProps(state, ownProps) {
-  return {
-    state: state
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-const ConnectedGame = connect(mapStateToProps, mapDispatchToProps)(Game);
-
-const store = createStore(game);
+const store = createStore(
+  game,
+  applyMiddleware(thunk)
+);
 const rootEl = document.getElementById('root');
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedGame></ConnectedGame>
+    <Game></Game>
   </Provider>,
   rootEl
 );
