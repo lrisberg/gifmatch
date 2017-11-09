@@ -73,21 +73,3 @@ export function setWaiting(waiting) {
     waiting: waiting
   }
 }
-
-// export function selectGif(key, gif) {
-//   return function thunk(dispatch, getState) {
-//
-//     if (getState().waiting) {
-//       return;
-//     }
-//
-//     // const intervalId = setInterval(function() {
-//     //   if (getState().timer > 1000) {
-//     //     clearInterval(intervalId);
-//     //     return // canvel interval
-//     //   }
-//     //
-//     //   dispatch({ type: "CLOCK_TICK" })
-//     // }, 1000)
-//   }
-// }

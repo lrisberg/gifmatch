@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class MissCounter extends React.Component {
   render() {
@@ -10,4 +11,10 @@ class MissCounter extends React.Component {
   }
 }
 
-export default MissCounter;
+function mapStateToProps(state, ownProps) {
+  return {
+    misses: state.misses
+  }
+}
+
+export default connect(mapStateToProps)(MissCounter);

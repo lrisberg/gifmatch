@@ -18,10 +18,7 @@ class Board extends React.Component {
 
   renderMissCounter = () => {
     return (
-      <MissCounter
-        misses={this.props.misses}
-      />
-
+      <MissCounter/>
     )
   }
 
@@ -73,6 +70,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const ConnectedBoard = connect(mapStateToProps, mapDispatchToProps)(Board);
-
-export default ConnectedBoard;
+export default connect(mapStateToProps, mapDispatchToProps)(Board);
