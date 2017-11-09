@@ -1,5 +1,6 @@
 import React from 'react';
 import Tile from './tile';
+import MissCounter from './missCounter';
 import { selectGif } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
@@ -17,9 +18,10 @@ class Board extends React.Component {
 
   renderMissCounter = () => {
     return (
-      <div className="miss-counter">
-        Misses: {this.props.misses}
-      </div>
+      <MissCounter
+        misses={this.props.misses}
+      />
+
     )
   }
 
@@ -59,7 +61,7 @@ function mapStateToProps(state, ownProps) {
     tileVisibility: state.tileVisibility,
     waiting: state.waiting,
     currentGif: state.currentGif,
-    currentKey: state.currentKey,
+    currentKey: state.currentKey
   }
 }
 
