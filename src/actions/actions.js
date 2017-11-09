@@ -5,6 +5,7 @@ export const SET_CURRENT_GIF = 'SET_CURRENT_GIF';
 export const SET_CURRENT_KEY = 'SET_CURRENT_KEY';
 export const SET_WAITING = 'SET_WAITING';
 export const ADD_MISS = 'ADD_MISS';
+export const SET_BOARD_SIZE = 'SET_BOARD_SIZE';
 
 // action creators
 
@@ -70,6 +71,14 @@ export function addMiss() {
 export function setWaiting(waiting) {
   return {
     type: SET_WAITING,
-    waiting: waiting
+    waiting
+  }
+}
+
+export function setBoardSize(gifs) {
+  console.log('inside setBoardSize action');
+  return {
+    type: SET_BOARD_SIZE,
+    gifs
   }
 }

@@ -4,7 +4,8 @@ import {
   SET_CURRENT_GIF,
   SET_CURRENT_KEY,
   SET_WAITING,
-  ADD_MISS
+  ADD_MISS,
+  SET_BOARD_SIZE
 } from '../actions/actions.js';
 
 function initialGifs() {
@@ -68,6 +69,12 @@ export default (state = initialState(), action) => {
       return {
         ...state,
         waiting: action.waiting
+      }
+    case SET_BOARD_SIZE:
+      console.log('inside SET_BOARD_SIZE Reducer')
+      return {
+        ...state,
+        gifs: action.gifs
       }
     default:
       return state
