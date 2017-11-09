@@ -1,6 +1,7 @@
 import React from 'react';
 import Tile from './tile';
 import MissCounter from './missCounter';
+import SizeSelector from './sizeSelector';
 import { selectGif } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
@@ -12,6 +13,7 @@ class Board extends React.Component {
           {this.renderGrid(this.props.gifs)}
         </div>
         {this.renderMissCounter()}
+        {this.renderSizeSelector()}
       </div>
     );
   }
@@ -19,6 +21,12 @@ class Board extends React.Component {
   renderMissCounter = () => {
     return (
       <MissCounter/>
+    )
+  }
+
+  renderSizeSelector = () => {
+    return (
+      <SizeSelector/>
     )
   }
 
