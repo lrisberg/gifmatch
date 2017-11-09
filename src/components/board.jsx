@@ -1,6 +1,6 @@
 import React from 'react';
 import Tile from './tile';
-import { selectGif, stopWaiting } from '../actions/actions.js';
+import { selectGif } from '../actions/actions.js';
 import { connect } from 'react-redux';
 
 class Board extends React.Component {
@@ -66,9 +66,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     onSelectGif: (key, gif) => {
-      dispatch(selectGif(key, gif, (key1, key2) => {
-        dispatch(stopWaiting(key1, key2));
-      }));
+      dispatch(selectGif(key, gif));
     }
   };
 }

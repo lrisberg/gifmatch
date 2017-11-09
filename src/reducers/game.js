@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import {
-  SELECT_GIF,
-  STOP_WAITING
+  SET_TILE_VISIBILITY,
+  SET_CURRENT_GIF,
+  SET_CURRENT_KEY,
+  SET_WAITING,
+  ADD_MISS
 } from '../actions/actions.js';
 
 function initialGifs() {
@@ -34,61 +37,38 @@ function initialState() {
 
 export default (state = initialState(), action) => {
   switch (action.type) {
-    case SELECT_GIF:
-      if (state.waiting) {
-        return { ...state };
-      }
+    case SET_TILE_VISIBILITY:
+      const { key, isVisible } = action;
 
-      const { key, gif, stopWaitingFunc } = action;
-
-      const tileVisibility = { ...state.tileVisibility, [key]: true };
-
-      if (state.currentGif === null) {
-        return {
-          ...state,
-          currentGif: gif,
-          currentKey: key,
-          tileVisibility: tileVisibility
-        }
-      }
-      else {
-        const currentKey = null;
-        const currentGif = null;
-
-        let misses = state.misses;
-        let waiting = state.waiting;
-
-        if (gif !== state.currentGif) {
-          misses += 1;
-          waiting = true;
-          const copyCurrentKey = state.currentKey;
-          setTimeout(() => {
-            stopWaitingFunc(key, copyCurrentKey);
-          }, 500);
-        }
-
-        return {
-          ...state,
-          misses: misses,
-          currentGif: currentGif,
-          currentKey: currentKey,
-          waiting: waiting,
-          tileVisibility: tileVisibility
-        };
-      }
-    case STOP_WAITING:
-      const { key1, key2 } = action;
-
-      const tileVisibility2 = {
+      const tileVisibility = {
         ...state.tileVisibility,
-        [key1]: false,
-        [key2]: false
-      };
+        [key]: isVisible,
+      }
 
       return {
         ...state,
-        waiting: false,
-        tileVisibility: tileVisibility2 }
+        tileVisibility: tileVisibility
+      }
+    case SET_CURRENT_GIF:
+      return {
+        ...state,
+        currentGif: action.gif
+      }
+    case SET_CURRENT_KEY:
+      return {
+        ...state,
+        currentKey: action.key
+      }
+    case ADD_MISS:
+      return {
+        ...state,
+        misses: state.misses + 1
+      }
+    case SET_WAITING:
+      return {
+        ...state,
+        waiting: action.waiting
+      }
     default:
       return state
   };

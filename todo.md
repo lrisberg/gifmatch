@@ -22,7 +22,7 @@ order:
 
 -business logic in reducer is sucky
 -check out thunk and saga
--rather than have reducer have business logic, run all asyc stuff in async actions
+-rather than have reducer have business logic, run all async stuff in async actions
 -action becomes a function (Rather than object)
 -pros and cons to thunk and saga
 
