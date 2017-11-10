@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import { getGifs } from '../utils/utils';
+
 import {
   SET_TILE_VISIBILITY,
   SET_CURRENT_GIF,
@@ -10,28 +11,11 @@ import {
   RESET_MISSES
 } from '../actions/actions.js';
 
-function initialGifs() {
-  const sourceGifs = [
-    'https://media.giphy.com/media/d1FL4zXfIQZMWFQQ/giphy.gif',
-    'https://media.giphy.com/media/l3q2Fa0XM2SEciHaU/giphy.gif',
-    'https://media.giphy.com/media/26xBy4g1eHS1vqZRS/giphy.gif',
-    'https://media.giphy.com/media/l3vRjYearYzgNb7e8/giphy.gif',
-    'https://media.giphy.com/media/l3q2yYNt8DXoyKRdm/giphy.gif',
-    'https://media.giphy.com/media/l3q2y9WQRuooRmyfS/giphy.gif',
-    'https://media.giphy.com/media/l3q2L3yM5UhxEnsvC/giphy.gif',
-    'https://media.giphy.com/media/3oz8xDzuVDbKoU4shi/giphy.gif'
-  ];
-  let doubledGifs = _.concat(sourceGifs, sourceGifs)
-  let shuffledGifs = _.shuffle(doubledGifs);
-  let groupedGifs = _.chunk(shuffledGifs, 4);
-  return groupedGifs;
-}
-
 function initialState() {
   return {
     currentGif: null,
     currentKey: null,
-    gifs: initialGifs(),
+    gifs: getGifs('medium'),
     misses: 0,
     waiting: false,
     tileVisibility: {}
