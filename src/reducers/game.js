@@ -5,7 +5,9 @@ import {
   SET_CURRENT_KEY,
   SET_WAITING,
   ADD_MISS,
-  SET_BOARD_SIZE
+  RESET_TILE_VISIBILITY,
+  SET_GIFS,
+  RESET_MISSES
 } from '../actions/actions.js';
 
 function initialGifs() {
@@ -70,11 +72,20 @@ export default (state = initialState(), action) => {
         ...state,
         waiting: action.waiting
       }
-    case SET_BOARD_SIZE:
-      console.log('inside SET_BOARD_SIZE Reducer')
+    case RESET_TILE_VISIBILITY:
+      return {
+        ...state,
+        tileVisibility: {}
+      }
+    case SET_GIFS:
       return {
         ...state,
         gifs: action.gifs
+      }
+    case RESET_MISSES:
+      return {
+        ...state,
+        misses: 0
       }
     default:
       return state
