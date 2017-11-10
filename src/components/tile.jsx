@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { selectGif } from '../actions/actions';
 
 class Tile extends React.Component {
   static propTypes = {
@@ -31,9 +33,23 @@ class Tile extends React.Component {
 
   toggleTile = () => {
     if (!this.props.visible) {
-      this.props.selectGif(this.props.gif);
+      this.props.selectGif(this.props.gifkey, this.props.gif);
     }
   }
 }
 
-export default Tile;
+function mapStateToProps(state, ownProps) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    selectGif: (key, gif) => {
+      dispatch(selectGif(key, gif));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tile);

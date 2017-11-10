@@ -44,10 +44,10 @@ class Board extends React.Component {
     const visible = this.props.tileVisibility[key] || false;
 
     return <Tile
-      selectGif={() => this.props.onSelectGif(key, gif)}
       visible={visible}
       gif={gif}
-      key={key} />;
+      key={key}
+      gifkey={key} />;
   }
 
   renderRow = (row, tiles) => {
@@ -70,12 +70,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onSelectGif: (key, gif) => {
-      dispatch(selectGif(key, gif));
-    }
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Board);
+export default connect(mapStateToProps)(Board);
